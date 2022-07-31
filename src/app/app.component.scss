@@ -1,0 +1,19 @@
+#nav-bar {
+  height: 30px;
+  width: inherit;
+  background-color: blue;
+}
+#nav-menu {
+  height: fit-content;
+  width: 30%;
+  background-color: red;
+}
+#content-area {
+  height: 100%;
+  width: 70%;
+  background-color: yellow;
+}
+#main-content{
+  display:flex;
+  flex-wrap: wrap;
+}
