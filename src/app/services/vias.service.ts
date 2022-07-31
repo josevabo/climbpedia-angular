@@ -17,6 +17,9 @@ export class ViasService {
 
   getAllVias(): Observable<any[]> {
     const endpoint = this.url + "/vias"
-    return this.httpClient.get<any[]>(endpoint)
+    let result = this.httpClient.get<any[]>(endpoint)
+    // console.log("executando ViasService getAllViasresult");
+    // console.log(result);
+    return result
   }
 }

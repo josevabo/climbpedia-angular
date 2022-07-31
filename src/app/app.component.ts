@@ -1,3 +1,4 @@
+import { ViasService } from './services/vias.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,16 +7,31 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'climbpedia-angular';
+  title = 'Climbpedia-angular';
+  vias: any[];
 
-  vias: any[] = [
-    {
-      nome: "Via dos Italianos",
-      descricao: "Via muito bonita no pao de acucar"
-    },
-    {
-      nome: "K2",
-      descricao: "Via linda no corcovado"
-    }
-  ]
+  constructor(private service: ViasService) {
+    this.vias = []
+  }
+
+  ngOnInit() {
+    this.getAllVias()
+    // this.vias = [
+    //   {
+    //     nome: "Via dos Italianos",
+    //     descricao: "Via muito bonita no pao de acucar"
+    //   },
+    //   {
+    //     nome: "K2",
+    //     descricao: "Via linda no corcovado"
+    //   }
+    // ]
+  }
+
+  getAllVias() {
+    return this.service.getAllVias().subscribe((vias: any[]) => {
+      // console.log("iniciando appComponent ngOnInit, obetndo vias" + vias);
+      this.vias = vias;
+    })
+  }
 }

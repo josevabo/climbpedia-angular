@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ViasModule } from './vias/vias.module';
 import { ForumModule } from './forum/forum.module';
 import { NgModule } from '@angular/core';
@@ -11,8 +12,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ViasModule,
-    ForumModule
+    ForumModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
