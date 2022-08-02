@@ -1,29 +1,48 @@
 <style>
 </style>
-<section id="nav-bar">ClimbPedia</section>
-<section style="display:flex;">
+<nav id="nav-bar">
+  <div class="nav__logo">
+    <div class="logo-container">
+      <img src="assets/images/logo.png" alt="">
+    </div>
+    ClimbPedia
+  </div>
+  <div class="nav__buttons">
+    <div>
+      <a href="">
+        <span><i class="">font awesome</i></span>
+        <span>texto botao</span>
+      </a>
+    </div>
+    <div>
+      <a href="">
+        <span><i class="">font awesome</i></span>
+        <span>texto botao</span>
+      </a>
+    </div>
+    <div>
+      <a href="">
+        <span><i class="">font awesome</i></span>
+        <span>texto botao</span>
+      </a>
+    </div>
+  </div>
+</nav>
+<!-- <section style="display:flex;"> -->
   <section id="nav-menu">
-    <div>menu lateral</div>
-    <div>
-      <span>filtros</span>
-      <div>filtro 1</div>
-      <div>filtro 2</div>
-      <div>filtro 3</div>
-      <div>filtro 4</div>
-      <div>filtro 5</div>
-    </div>
-    <div>
-      <span>lista de funcionalidades</span>
-      <div>Funcionalidade 1</div>
-      <div>Funcionalidade 2</div>
-      <div>Funcionalidade 3</div>
-      <div>Funcionalidade 4</div>
-    </div>
+    <div>menu superior</div>
+    <span>filtros</span>
+    <div>filtro 1</div>
+    <div>filtro 2</div>
+    <div>filtro 3</div>
+    <div>filtro 4</div>
+    <div>filtro 5</div>
   </section>
   <section id="content-area">
     <div id="content-filter">filtros conteudo</div>
     <div id="main-content">
+      <div><p style="font-weight: bolder;">Estão sendo exibidos XX resultados para Vias</div>
       <app-card-vias *ngFor="let via of vias" [via]="via"></app-card-vias>
     </div>
   </section>
-</section>
+<!-- </section> -->
