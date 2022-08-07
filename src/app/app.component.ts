@@ -1,5 +1,6 @@
 import { ViasService } from './services/vias.service';
 import { Component } from '@angular/core';
+import { faHouse, faUsers, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Climbpedia-angular';
   vias: any[];
+  userName: string;
   totalVias: number = 0;
+  faHouse = faHouse;
+  faUsers = faUsers;
+  faHeart = faHeart;
+
 
   constructor(private service: ViasService) {
+    this.userName = "José Vabo"
     this.vias = []
   }
 

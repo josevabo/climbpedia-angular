@@ -9,7 +9,7 @@
     ClimbPedia
   </div>
   <div class="nav__buttons">
-    <span>Usuário</span>
+    <span>{{userName}}</span>
     <div class="user-img-container">
       <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/e7/7b/default-avatar-2020-56.jpg?w=100&amp;h=-1&amp;s=1" class="user-img">
     </div>
@@ -17,26 +17,26 @@
 </header>
 <!-- <section style="display:flex;"> -->
   <section id="nav-menu">
-    <div class="nav-item">
-      <a href="">
-        <span><i class="">xx</i></span>
+    <div class="nav-item active">
+      <a href="" style="padding: 0 5px;">
+        <span style="padding: 0 5px;"><fa-icon [icon]="faHouse"></fa-icon></span>
         <span>Home</span>
       </a>
     </div>
     <div class="nav-item">
       <a href="">
-        <span><i class="">xx</i></span>
+        <span><fa-icon [icon]="faUsers"></fa-icon></span>
         <span>Forum</span>
       </a>
     </div>
     <div class="nav-item">
       <a href="">
-        <span><i class="">xx</i></span>
+        <span><fa-icon [icon]="faHeart"></fa-icon></span>
         <span>Favoritos</span>
       </a>
     </div>
   </section>
-  <section id="filter-area" style="display:flex;width:100%;justify-content: space-between;">
+  <section class="filter-area" style="">
     <span>filtros</span>
     <div>filtro 1</div>
     <div>filtro 2</div>
