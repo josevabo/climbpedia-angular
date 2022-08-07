@@ -10,10 +10,18 @@ export class CardViasComponent implements OnInit {
   //   nome:"",
   //   descricao:""
   // }
-
+  urlImg: string;
+  urlImgDefault = "https://www.escaladas.com.br/img/dinamica/via/1033/principal/1033-160419-1.png";
   @Input() via: any;
 
-  constructor() { }
+  constructor() {
+    try{
+      this.urlImg = this.via.imagem.url ? this.via.imagem.url : this.urlImgDefault;
+    } catch (e) {
+      this.urlImg = this.urlImgDefault;
+    }
+
+  }
 
   ngOnInit(): void {
   }

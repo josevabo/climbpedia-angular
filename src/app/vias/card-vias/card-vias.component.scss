@@ -17,14 +17,19 @@
 .card-image {
   height: 200px;
   padding: 0 20px 0 10px;
-  // border: 1px solid;
+  width: 200px;
+  max-width: 200px;
 }
 
 .card-image img {
   height: inherit;
-  width: inherit;
+  max-width: inherit;
   display: block;
   margin: 0 auto;
+}
+
+.card-text-area{
+  max-width: 70%;
 }
 
 .card-title {

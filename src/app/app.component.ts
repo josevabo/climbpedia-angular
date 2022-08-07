@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Climbpedia-angular';
   vias: any[];
+  totalVias: number = 0;
 
   constructor(private service: ViasService) {
     this.vias = []
@@ -30,8 +31,9 @@ export class AppComponent {
 
   getAllVias() {
     return this.service.getAllVias().subscribe((vias: any[]) => {
-      // console.log("iniciando appComponent ngOnInit, obetndo vias" + vias);
       this.vias = vias;
+      this.totalVias = vias.length;
     })
   }
+
 }

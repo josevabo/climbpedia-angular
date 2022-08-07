@@ -1,36 +1,42 @@
 <style>
 </style>
-<nav id="nav-bar">
+<header id="nav-bar">
   <div class="nav__logo">
     <div class="logo-container">
-      <img src="assets/images/logo.png" alt="">
+      <!-- <img src="assets/images/logo.png" alt=""> -->
+      <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="">
     </div>
     ClimbPedia
   </div>
   <div class="nav__buttons">
-    <div>
-      <a href="">
-        <span><i class="">font awesome</i></span>
-        <span>texto botao</span>
-      </a>
-    </div>
-    <div>
-      <a href="">
-        <span><i class="">font awesome</i></span>
-        <span>texto botao</span>
-      </a>
-    </div>
-    <div>
-      <a href="">
-        <span><i class="">font awesome</i></span>
-        <span>texto botao</span>
-      </a>
+    <span>Usuário</span>
+    <div class="user-img-container">
+      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/e7/7b/default-avatar-2020-56.jpg?w=100&amp;h=-1&amp;s=1" class="user-img">
     </div>
   </div>
-</nav>
+</header>
 <!-- <section style="display:flex;"> -->
   <section id="nav-menu">
-    <div>menu superior</div>
+    <div class="nav-item">
+      <a href="">
+        <span><i class="">xx</i></span>
+        <span>Home</span>
+      </a>
+    </div>
+    <div class="nav-item">
+      <a href="">
+        <span><i class="">xx</i></span>
+        <span>Forum</span>
+      </a>
+    </div>
+    <div class="nav-item">
+      <a href="">
+        <span><i class="">xx</i></span>
+        <span>Favoritos</span>
+      </a>
+    </div>
+  </section>
+  <section id="filter-area" style="display:flex;width:100%;justify-content: space-between;">
     <span>filtros</span>
     <div>filtro 1</div>
     <div>filtro 2</div>
@@ -39,9 +45,9 @@
     <div>filtro 5</div>
   </section>
   <section id="content-area">
-    <div id="content-filter">filtros conteudo</div>
+    <!-- <div id="content-filter">filtros conteudo</div> -->
     <div id="main-content">
-      <div><p style="font-weight: bolder;">Estão sendo exibidos XX resultados para Vias</div>
+      <div><p style="text-align: left;">Foram encontradas {{totalVias}} Vias</div>
       <app-card-vias *ngFor="let via of vias" [via]="via"></app-card-vias>
     </div>
   </section>
