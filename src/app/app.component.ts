@@ -1,6 +1,6 @@
 import { ViasService } from './services/vias.service';
 import { Component } from '@angular/core';
-import { faHouse, faUsers, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faUsers, faHeart, faImages } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +15,7 @@ export class AppComponent {
   faHouse = faHouse;
   faUsers = faUsers;
   faHeart = faHeart;
+  faImages = faImages;
 
 
   constructor(private service: ViasService) {

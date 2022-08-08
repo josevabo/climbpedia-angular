@@ -15,40 +15,31 @@
     </div>
   </div>
 </header>
-<!-- <section style="display:flex;"> -->
-  <section id="nav-menu">
-    <div class="nav-item active">
-      <a href="" style="padding: 0 5px;">
+  <section id="nav-menu" style="font-weight: bold;">
+    <div class="nav-item button"  routerLinkActive="activebutton">
+      <a routerLink="/vias">
         <span style="padding: 0 5px;"><fa-icon [icon]="faHouse"></fa-icon></span>
         <span>Home</span>
       </a>
     </div>
-    <div class="nav-item">
+    <div class="nav-item button" routerLink="/forum" routerLinkActive="activebutton">
       <a href="">
         <span><fa-icon [icon]="faUsers"></fa-icon></span>
         <span>Forum</span>
       </a>
     </div>
-    <div class="nav-item">
+    <div class="nav-item button" routerLink="/favoritos" routerLinkActive="activebutton">
       <a href="">
         <span><fa-icon [icon]="faHeart"></fa-icon></span>
         <span>Favoritos</span>
       </a>
     </div>
-  </section>
-  <section class="filter-area" style="">
-    <span>filtros</span>
-    <div>filtro 1</div>
-    <div>filtro 2</div>
-    <div>filtro 3</div>
-    <div>filtro 4</div>
-    <div>filtro 5</div>
-  </section>
-  <section id="content-area">
-    <!-- <div id="content-filter">filtros conteudo</div> -->
-    <div id="main-content">
-      <div><p style="text-align: left;">Foram encontradas {{totalVias}} Vias</div>
-      <app-card-vias *ngFor="let via of vias" [via]="via"></app-card-vias>
+    <div class="nav-item button" routerLink="/galeria" routerLinkActive="activebutton">
+      <a href="">
+        <span><fa-icon [icon]="faImages"></fa-icon></span>
+        <span>Galeria</span>
+      </a>
     </div>
   </section>
-<!-- </section> -->
+  <router-outlet></router-outlet>
+

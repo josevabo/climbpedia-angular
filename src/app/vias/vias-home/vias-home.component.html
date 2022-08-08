@@ -1,0 +1,16 @@
+  <section class="filter-area" style="">
+    <span>filtros</span>
+    <div>filtro 1</div>
+    <div>filtro 2</div>
+    <div>filtro 3</div>
+    <div>filtro 4</div>
+    <div>filtro 5</div>
+  </section>
+  <section id="content-area">
+    <!-- <div id="content-filter">filtros conteudo</div> -->
+    <div id="main-content">
+      <div><p style="text-align: left;">Foram encontradas {{totalVias}} Vias</div>
+      <app-card-vias *ngFor="let via of vias" [via]="via"></app-card-vias>
+    </div>
+  </section>
+<!-- </section> -->

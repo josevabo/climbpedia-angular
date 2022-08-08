@@ -1,0 +1,18 @@
+
+.filter-area {
+  display:flex;
+  width:100%;
+  justify-content: space-between;
+  display: none;
+}
+
+#content-area {
+  height: 100%;
+  text-align: center;
+  text-align: -webkit-center;
+}
+#main-content{
+  display:flex;
+  flex-direction: column;
+  max-width: 1000px;
+}
