@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ForumHomeComponent } from './forum-home/forum-home.component';
+import { FavoritosHomeComponent } from './favoritos-home/favoritos-home.component';
 
 
 
 @NgModule({
   declarations: [
-    ForumHomeComponent
+    FavoritosHomeComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class ForumModule { }
+export class FavoritosModule { }

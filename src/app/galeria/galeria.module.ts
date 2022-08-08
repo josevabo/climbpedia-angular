@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ForumHomeComponent } from './forum-home/forum-home.component';
+import { GaleriaHomeComponent } from './galeria-home/galeria-home.component';
 
 
 
 @NgModule({
   declarations: [
-    ForumHomeComponent
+    GaleriaHomeComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class ForumModule { }
+export class GaleriaModule { }
