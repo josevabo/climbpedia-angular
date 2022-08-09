@@ -12,7 +12,11 @@
   text-align: -webkit-center;
 }
 #main-content{
-  display:flex;
-  flex-direction: column;
   max-width: 1000px;
+
+  &-header {
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+  }
 }
