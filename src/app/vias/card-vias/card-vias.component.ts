@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-card-vias',
@@ -6,12 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./card-vias.component.scss']
 })
 export class CardViasComponent implements OnInit {
-  // via = {
-  //   nome:"",
-  //   descricao:""
-  // }
   urlImg: string;
   urlImgDefault = "https://www.escaladas.com.br/img/dinamica/via/1033/principal/1033-160419-1.png";
+  faHeart = faHeart;
   @Input() via: any;
 
   constructor() {
