@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { FormControl } from '@angular/forms';
 import { ViasService } from '../../services/vias.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class ViasHomeComponent implements OnInit {
   title = 'Vias';
   vias: any[];
   totalVias: number = 0;
-  search: String = ""
+  search: string = ""
   constructor(private service: ViasService) {
     this.vias = []
   }
@@ -23,10 +22,10 @@ export class ViasHomeComponent implements OnInit {
 
   searchVias(){
     console.log("texto pesquisado: " + this.search)
-    const viasResult = this.service.findViasByText(this.search)
-    this.updateViasList(viasResult)
+    this.service.findViasByText(this.search).subscribe((vias: any[]) => {
+      this.updateViasList(vias)
+    })
 
-    console.log(viasResult)
   }
 
   getAllVias() {
