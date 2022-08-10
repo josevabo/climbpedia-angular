@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +26,17 @@ export class ViasService {
     params = params.append('search', search);
 
     return this.httpClient.get<any[]>(this.endpoint, {params:params})
+  }
+
+  addFavorite(viaId: number, userId: number): Observable<boolean> {
+    // return this.httpClient.post<boolean>(this.endpoint + "/addfavorite", {"viaId":viaId, "userId":userId});
+    let mocked = true
+    return of(mocked)
+  }
+
+  removeFavorite(viaId: number, userId: number): Observable<boolean> {
+    // return this.httpClient.post<boolean>(this.endpoint + "/removefavorite", {"viaId":viaId, "userId":userId});
+    let mocked = true
+    return of(mocked)
   }
 }

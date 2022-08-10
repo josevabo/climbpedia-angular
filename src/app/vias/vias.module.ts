@@ -1,3 +1,4 @@
+import { ViasService } from './../services/vias.service';
 import { FormsModule } from '@angular/forms';
 // import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -27,6 +28,7 @@ import {MatIconModule} from '@angular/material/icon';
     CardViasComponent,
     ViasHomeComponent,
   ],
+  providers: [ViasService],
   bootstrap: [ViasHomeComponent]
 })
 export class ViasModule { }
