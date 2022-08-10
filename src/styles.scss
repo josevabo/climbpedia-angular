@@ -1,4 +1,7 @@
 
+// regular style toast
+@import '~ngx-toastr/toastr'; //https://www.npmjs.com/package/ngx-toastr
+
 :root {
   --dark-grey: #595959;
 }
@@ -18,3 +21,4 @@ button {
 .scale-hover:hover {
   transform: scale(1.25);
 }
+

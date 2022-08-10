@@ -12,7 +12,7 @@ export class ViasHomeComponent implements OnInit {
   vias: any[];
   totalVias: number = 0;
   search: string = ""
-  constructor(private service: ViasService) {
+  constructor(private viasService: ViasService) {
     this.vias = []
   }
 
@@ -22,14 +22,14 @@ export class ViasHomeComponent implements OnInit {
 
   searchVias(){
     console.log("texto pesquisado: " + this.search)
-    this.service.findViasByText(this.search).subscribe((vias: any[]) => {
+    this.viasService.findViasByText(this.search).subscribe((vias: any[]) => {
       this.updateViasList(vias)
     })
 
   }
 
   getAllVias() {
-    return this.service.getAllVias().subscribe((vias: any[]) => {
+    return this.viasService.getAllVias().subscribe((vias: any[]) => {
       this.updateViasList(vias)
       console.log("Executando getAllVias :")
       console.table(vias)
