@@ -40,17 +40,14 @@ export class ViasService {
 
   getViasFavoritasByUsuario() {
     const url = this.endpoint + "/favoritos"
-    let params = new HttpParams()
+    // let params = new HttpParams()
     const usuarioId = 1;
     // params = params.append('usuario', usuarioId);
-
-    // return this.httpClient.get<any[]>(url, {params:params})
     return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId)
-    // return this.httpClient.get<any[]>(this.endpoint)
-    // throw new Error('Method not implemented.');
   }
-  removeFavorite(viaId: number, userId: number): Observable<boolean> {
-    // return this.httpClient.post<boolean>(this.endpoint + "/removefavorite", {"viaId":viaId, "userId":userId});
+
+  removeFavorite(viaId: number, userId: number): Observable<any> {
+    return this.httpClient.delete<any>(this.endpoint + "/favoritos/" + viaId);
     let mocked = true
     return of(mocked)
   }

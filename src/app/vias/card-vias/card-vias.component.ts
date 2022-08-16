@@ -35,22 +35,17 @@ export class CardViasComponent implements OnInit {
     this.viasService.addFavorite(this.via.id, this.userId).subscribe({
         next: (response) => {
           console.log("retorno addFavorito: ",response)
-          // if (response.status==200) {
-            return this.toggleFavoriteSuccess(true, "Adicionada aos favoritos com sucesso!")
-          // }
-          this.toastr.error("Falha ao adicionar aos favoritos!")
+          return this.toggleFavoriteSuccess(true, "Adicionada aos favoritos com sucesso!")
         },
         error: (err)=> this.toggleFavoriteError("Falha ao adicionar aos favoritos!", err)
-    })
-  }
+      })
+    }
 
   removeFavorite() {
     this.viasService.removeFavorite(this.via.id, this.userId).subscribe({
       next: (response) => {
-        if (response) {
-          return this.toggleFavoriteSuccess(false, "Removida dos favoritos com sucesso!")
-        }
-        this.toastr.error("Falha ao remover dos favoritos!")
+      console.log("retorno removeFavorito: ",response)
+        return this.toggleFavoriteSuccess(false, "Removida dos favoritos com sucesso!")
       },
       error: (err)=>{
         this.toggleFavoriteError("Falha ao remover dos favoritos!", err)
