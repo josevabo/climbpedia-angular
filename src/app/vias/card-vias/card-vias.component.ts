@@ -11,10 +11,9 @@ import { faHeart as faEmptyHeart } from '@fortawesome/free-regular-svg-icons';
   providers:[ViasService]
 })
 export class CardViasComponent implements OnInit {
-  userId = 123;
+  userId = 1;
   urlImg: string;
   urlImgDefault = "https://www.escaladas.com.br/img/dinamica/via/1033/principal/1033-160419-1.png";
-  isfavorite: boolean = false;
   faEmptyHeart = faEmptyHeart;
   faSolidHeart = faSolidHeart;
   @Input() via: any;
@@ -28,7 +27,7 @@ export class CardViasComponent implements OnInit {
   }
 
   togglefavorite(){
-    this.isfavorite ? this.removeFavorite() : this.addFavorite();
+    this.via.isFavorita ? this.removeFavorite() : this.addFavorite();
   }
 
   addFavorite() {
@@ -54,7 +53,7 @@ export class CardViasComponent implements OnInit {
   }
 
   toggleFavoriteSuccess(favoriteStatus: boolean, toastMessage: string){
-    this.isfavorite = favoriteStatus;
+    this.via.isFavorita = favoriteStatus;
     this.toastr.success(toastMessage)
   }
 

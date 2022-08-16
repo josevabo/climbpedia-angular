@@ -32,25 +32,23 @@ export class ViasHomeComponent implements OnInit {
   getAllVias() {
     return this.viasService.getAllVias().subscribe((vias: Via[]) => {
       this.updateViasList(vias)
-      console.log("Executando getAllVias :")
-      console.table(vias)
     })
   }
 
   updateViasList(vias: Via[]) {
-    this.vias = vias;
     this.totalVias = vias.length;
-  }
-
-  getViasFavoritasByUsuario() {
-    this.viasService.getViasFavoritasByUsuario().subscribe((viasFavoritasId: number[]) => {
-      return viasFavoritasId;
+    this.getViasFavoritasByUsuario().subscribe((viasFavoritasId: number[]) => {
+      vias.forEach(via => {
+        via.isFavorita = viasFavoritasId.includes(via.id) ? true : false
+      })
+      this.vias = vias;
+      console.log("Update vias:")
+      console.log(this.vias)
     })
   }
 
-  // setViaFavorita() {
-  //   this.vias.forEach((via)=>{
-  //     via.isFavorita = this.viasIdFavoritasList.includes(via.id) ? true : false;
-  //   })
-  // }
+  getViasFavoritasByUsuario() {
+    return this.viasService.getViasFavoritasByUsuario()
+  }
+
 }

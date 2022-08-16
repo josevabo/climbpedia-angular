@@ -48,8 +48,8 @@ export class ViasService {
 
   removeFavorite(viaId: number, userId: number): Observable<any> {
     return this.httpClient.delete<any>(this.endpoint + "/favoritos/" + viaId);
-    let mocked = true
-    return of(mocked)
+    // let mocked = true
+    // return of(mocked)
   }
 
   setViaFavorita() {
