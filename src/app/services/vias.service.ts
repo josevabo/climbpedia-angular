@@ -1,3 +1,4 @@
+import { Via } from './../models/via.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -9,10 +10,13 @@ import { Observable, of } from 'rxjs';
 export class ViasService {
 
   private readonly endpoint = environment.apiEndpointUrl + "/vias"
-  viasList: any[];
+  vias: Via[];
+  viasFavoritasIdList: number[];
+
 
   constructor(private httpClient: HttpClient) {
-    this.viasList = []
+    this.vias = []
+    this.viasFavoritasIdList = []
   }
 
   getAllVias(): Observable<any[]> {
@@ -28,15 +32,32 @@ export class ViasService {
     return this.httpClient.get<any[]>(this.endpoint, {params:params})
   }
 
-  addFavorite(viaId: number, userId: number): Observable<boolean> {
-    // return this.httpClient.post<boolean>(this.endpoint + "/addfavorite", {"viaId":viaId, "userId":userId});
+  addFavorite(viaId: number, userId: number): Observable<any> {
+    return this.httpClient.post<any>(this.endpoint + "/favoritos/" + viaId, null);
     let mocked = true
     return of(mocked)
   }
 
+  getViasFavoritasByUsuario() {
+    const url = this.endpoint + "/favoritos"
+    let params = new HttpParams()
+    const usuarioId = 1;
+    // params = params.append('usuario', usuarioId);
+
+    // return this.httpClient.get<any[]>(url, {params:params})
+    return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId)
+    // return this.httpClient.get<any[]>(this.endpoint)
+    // throw new Error('Method not implemented.');
+  }
   removeFavorite(viaId: number, userId: number): Observable<boolean> {
     // return this.httpClient.post<boolean>(this.endpoint + "/removefavorite", {"viaId":viaId, "userId":userId});
     let mocked = true
     return of(mocked)
+  }
+
+  setViaFavorita() {
+    this.vias.forEach((via)=>{
+      via.isFavorita = this.viasFavoritasIdList.includes(via.id) ? true : false;
+    })
   }
 }

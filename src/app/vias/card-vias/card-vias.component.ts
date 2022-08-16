@@ -32,14 +32,15 @@ export class CardViasComponent implements OnInit {
   }
 
   addFavorite() {
-    this.viasService.addFavorite(this.via.id, this.userId).subscribe((response) => {
-      if (response) {
-        return this.toggleFavoriteSuccess(true, "Adicionada aos favoritos com sucesso!")
-      }
-      this.toastr.error("Falha ao adicionar aos favoritos!")
-    },
-    (err)=>{
-      this.toggleFavoriteError("Falha ao adicionar aos favoritos!", err)
+    this.viasService.addFavorite(this.via.id, this.userId).subscribe({
+        next: (response) => {
+          console.log("retorno addFavorito: ",response)
+          // if (response.status==200) {
+            return this.toggleFavoriteSuccess(true, "Adicionada aos favoritos com sucesso!")
+          // }
+          this.toastr.error("Falha ao adicionar aos favoritos!")
+        },
+        error: (err)=> this.toggleFavoriteError("Falha ao adicionar aos favoritos!", err)
     })
   }
 
