@@ -1,6 +1,10 @@
+import { ViasFormInsertComponent } from './../vias-form-insert/vias-form-insert.component';
+import { CardViasComponent } from './../card-vias/card-vias.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { ViasService } from '../../services/vias.service';
 import { Via } from '../../models/via.model';
+
 
 @Component({
   selector: 'app-vias-home',
@@ -13,7 +17,7 @@ export class ViasHomeComponent implements OnInit {
   vias: Via[];
   totalVias: number = 0;
   search: string = ""
-  constructor(private viasService: ViasService) {
+  constructor(private viasService: ViasService, private dialog: MatDialog) {
     this.vias = []
   }
 
@@ -49,6 +53,16 @@ export class ViasHomeComponent implements OnInit {
 
   getViasFavoritasByUsuario() {
     return this.viasService.getViasFavoritasByUsuario()
+  }
+
+  openDialog() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    this.dialog.open(ViasFormInsertComponent, dialogConfig);
   }
 
 }

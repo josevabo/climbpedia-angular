@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button';
 import { ViasService } from './../services/vias.service';
 import { FormsModule } from '@angular/forms';
 // import { RouterModule } from '@angular/router';
@@ -9,12 +10,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import { ViasFormInsertComponent } from './vias-form-insert/vias-form-insert.component';
 
 
 @NgModule({
   declarations: [
     CardViasComponent,
     ViasHomeComponent,
+    ViasFormInsertComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +25,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule
   ],
   exports: [
     CardViasComponent,
