@@ -12,18 +12,14 @@ import { faHeart as faEmptyHeart } from '@fortawesome/free-regular-svg-icons';
 })
 export class CardViasComponent implements OnInit {
   userId = 1;
-  urlImg: string;
+  // urlImg: string = "";
   urlImgDefault = "https://www.escaladas.com.br/img/dinamica/via/1033/principal/1033-160419-1.png";
   faEmptyHeart = faEmptyHeart;
   faSolidHeart = faSolidHeart;
   @Input() via: any;
 
   constructor(private viasService: ViasService, private toastr: ToastrService) {
-    try {
-      this.urlImg = this.via.imagem.url ? this.via.imagem.url : this.urlImgDefault;
-    } catch (e) {
-      this.urlImg = this.urlImgDefault;
-    }
+
   }
 
   togglefavorite(){
@@ -63,6 +59,13 @@ export class CardViasComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.isNullOrIdIsNull(this.via.imagem)) {
+      this.via.imagem = {url: this.urlImgDefault}
+    }
+  }
+
+  isNullOrIdIsNull(obj: any){
+    return obj == null || obj.id ==null
   }
 
 }
