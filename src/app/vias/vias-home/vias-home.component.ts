@@ -34,6 +34,7 @@ export class ViasHomeComponent implements OnInit {
   }
 
   getAllVias() {
+    this.search = "";
     return this.viasService.getAllVias().subscribe((vias: Via[]) => {
       this.updateViasList(vias)
     })
@@ -41,7 +42,7 @@ export class ViasHomeComponent implements OnInit {
 
   updateViasList(vias: Via[]) {
     this.totalVias = vias.length;
-    this.getViasFavoritasByUsuario().subscribe((viasFavoritasId: number[]) => {
+    this.getViasFavoritasByUsuario().subscribe((viasFavoritasId: any[]) => {
       vias.forEach(via => {
         via.isFavorita = viasFavoritasId.includes(via.id) ? true : false
       })
@@ -55,14 +56,20 @@ export class ViasHomeComponent implements OnInit {
     return this.viasService.getViasFavoritasByUsuario()
   }
 
-  openDialog() {
+  openInsertDialog() {
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.width = "1000px";
+    const dialogRef = this.dialog.open(ViasFormInsertComponent, dialogConfig);
 
-    this.dialog.open(ViasFormInsertComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Modal fechado. Result = ', result);
+
+      if(result) this.getAllVias();
+    });
   }
 
 }

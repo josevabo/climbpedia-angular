@@ -9,9 +9,10 @@ import { Observable, of } from 'rxjs';
 })
 export class ViasService {
 
-  private readonly endpoint = environment.apiEndpointUrl + "/vias"
+
+  private readonly viasEndpoint = environment.apiEndpointUrl + "/vias"
   vias: Via[];
-  viasFavoritasIdList: number[];
+  viasFavoritasIdList: any[];
 
 
   constructor(private httpClient: HttpClient) {
@@ -20,7 +21,7 @@ export class ViasService {
   }
 
   getAllVias(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.endpoint)
+    return this.httpClient.get<any[]>(this.viasEndpoint)
   }
 
   findViasByText(search: string) {
@@ -29,17 +30,17 @@ export class ViasService {
     let params = new HttpParams()
     params = params.append('search', search);
 
-    return this.httpClient.get<any[]>(this.endpoint, {params:params})
+    return this.httpClient.get<any[]>(this.viasEndpoint, {params:params})
   }
 
   addFavorite(viaId: number, userId: number): Observable<any> {
-    return this.httpClient.post<any>(this.endpoint + "/favoritos/" + viaId, null);
+    return this.httpClient.post<any>(this.viasEndpoint + "/favoritos/" + viaId, null);
     let mocked = true
     return of(mocked)
   }
 
   getViasFavoritasByUsuario() {
-    const url = this.endpoint + "/favoritos"
+    const url = this.viasEndpoint + "/favoritos"
     // let params = new HttpParams()
     const usuarioId = 1;
     // params = params.append('usuario', usuarioId);
@@ -47,7 +48,7 @@ export class ViasService {
   }
 
   removeFavorite(viaId: number, userId: number): Observable<any> {
-    return this.httpClient.delete<any>(this.endpoint + "/favoritos/" + viaId);
+    return this.httpClient.delete<any>(this.viasEndpoint + "/favoritos/" + viaId);
     // let mocked = true
     // return of(mocked)
   }
@@ -57,4 +58,25 @@ export class ViasService {
       via.isFavorita = this.viasFavoritasIdList.includes(via.id) ? true : false;
     })
   }
+
+  insertVia(via: Via): Observable<any> {
+    // const bodyTest = {
+    //   nome: "Buracos 4 com log, teste usando front com viasService e body do post mockado",
+    //   setor: {id:2},
+    //   graduacao:"V0",
+    //   tipoVia: {id:2},
+    //   urlCroqui:"url buracos",
+    //   imagem:{id:2},
+    //   tags:"#boulder",
+    //   conquistador: {id:5},
+    //   descricao:"Boulder bem da hora bom para iniciantes",
+    //   dtConquista: null,
+    //   extensao: 4
+    // }
+    console.log("Executando insertVia:")
+    console.log(via)
+    return this.httpClient.post<any[]>(this.viasEndpoint, via)
+
+  }
+
 }

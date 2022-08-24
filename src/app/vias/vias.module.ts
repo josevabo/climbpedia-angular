@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ViasService } from './../services/vias.service';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +27,8 @@ import { ViasFormInsertComponent } from './vias-form-insert/vias-form-insert.com
     MatInputModule,
     MatIconModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   exports: [
     CardViasComponent,

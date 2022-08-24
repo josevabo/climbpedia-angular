@@ -1,8 +1,56 @@
-<p>vias-form-insert works!</p>
+<h2 mat-dialog-title>Cadastrar nova via</h2>
 <form name="form-insert-via" class="" (submit)="insertVia()">
   <mat-form-field >
     <mat-label>Nome</mat-label>
-    <input matInput [(ngModel)]="nome"  name="nome">
+    <input matInput [(ngModel)]="via.nome"  name="nome">
   </mat-form-field>
-  <button matSuffix mat-button style="border:none;background:transparent;" type="submit"><mat-icon class="scale-hover" >save</mat-icon></button>
-  </form>
+  <mat-form-field >
+    <mat-label>Descrição</mat-label>
+    <input matInput [(ngModel)]="via.descricao"  name="descricao">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Graduação</mat-label>
+    <input matInput [(ngModel)]="via.graduacao"  name="graduacao">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Setor</mat-label>
+    <input matInput [(ngModel)]="via.setor.id"  name="setor_id">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Tipo de Via</mat-label>
+    <input matInput [(ngModel)]="via.tipoVia.id"  name="tipoVia_id">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Url do croqui</mat-label>
+    <input matInput [(ngModel)]="via.urlCroqui"  name="urlCroqui">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Carregar Imagem</mat-label>
+    <input matInput [(ngModel)]="via.imagem.id"  name="imagem_id">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Tags</mat-label>
+    <input matInput [(ngModel)]="via.tags"  name="tags">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Conquistador</mat-label>
+    <input matInput [(ngModel)]="via.conquistador.id"  name="conquistador_id">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Data Conquista</mat-label>
+    <input matInput [(ngModel)]="via.dtConquista"  name="dtConquista">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Extensao</mat-label>
+    <input matInput [(ngModel)]="via.extensao"  name="extensao">
+  </mat-form-field>
+  <mat-dialog-actions>
+    <button matSuffix mat-stroked-button mat-dialog-close style="position: relative;float: right;">
+      <mat-icon class="scale-hover" [inline]="true" >close</mat-icon>Fechar
+    </button>
+    <button matSuffix mat-stroked-button color="primary" type="submit" style="position: relative;float: right;" [mat-dialog-close]="true">
+      Salvar <mat-icon class="scale-hover">save</mat-icon>
+    </button>
+  </mat-dialog-actions>
+
+</form>
