@@ -1,5 +1,3 @@
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 import { ViasService } from './../services/vias.service';
 import { FormsModule } from '@angular/forms';
 // import { RouterModule } from '@angular/router';
@@ -9,8 +7,11 @@ import { CardViasComponent } from './card-vias/card-vias.component';
 import { ViasHomeComponent } from './vias-home/vias-home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
 import { ViasFormInsertComponent } from './vias-form-insert/vias-form-insert.component';
 
 
@@ -28,7 +29,8 @@ import { ViasFormInsertComponent } from './vias-form-insert/vias-form-insert.com
     MatIconModule,
     FormsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   exports: [
     CardViasComponent,

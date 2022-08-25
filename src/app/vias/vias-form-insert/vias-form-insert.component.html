@@ -14,11 +14,21 @@
   </mat-form-field>
   <mat-form-field >
     <mat-label>Setor</mat-label>
-    <input matInput [(ngModel)]="via.setor.id"  name="setor_id">
+    <mat-select [(ngModel)]="via.setor.id" name="setor">
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let setor of setores" [value]="setor.id">
+        {{setor.nome}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Tipo de Via</mat-label>
-    <input matInput [(ngModel)]="via.tipoVia.id"  name="tipoVia_id">
+    <mat-select [(ngModel)]="via.tipoVia.id" name="tipoVia_id">
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let tipoVia of tiposVia" [value]="tipoVia.id">
+        {{tipoVia.nome}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Url do croqui</mat-label>
@@ -26,7 +36,12 @@
   </mat-form-field>
   <mat-form-field >
     <mat-label>Carregar Imagem</mat-label>
-    <input matInput [(ngModel)]="via.imagem.id"  name="imagem_id">
+    <mat-select [(ngModel)]="via.imagem.id" name="imagem_id">
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let imagem of imagens" [value]="imagem.id">
+        {{imagem.url}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Tags</mat-label>
@@ -34,7 +49,12 @@
   </mat-form-field>
   <mat-form-field >
     <mat-label>Conquistador</mat-label>
-    <input matInput [(ngModel)]="via.conquistador.id"  name="conquistador_id">
+    <mat-select [(ngModel)]="via.conquistador.id" name="conquistador_id">
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let conquistador of conquistadores" [value]="conquistador.id">
+        {{conquistador.nome}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Data Conquista</mat-label>

@@ -10,6 +10,27 @@ import { MatDialogClose, MatDialogRef } from '@angular/material/dialog';
 })
 export class ViasFormInsertComponent implements OnInit {
   via: Via = {}
+  setores: any[] = [
+    {id:1, nome: "Face Oeste Pao de Acucar"},
+    {id:2, nome: "Pracinha do Grajau"},
+    {id:3, nome: "Corcovado"},
+  ];
+  tiposVia: any[] = [
+    {id:1, nome: "Tradicional"},
+    {id:2, nome: "Esportiva"},
+    {id:3, nome: "Boulder"},
+  ];
+  conquistadores: any[] = [
+    {id:1, nome: "Andre Ilha"},
+    {id:2, nome: "Pedro Bugim"},
+    {id:3, nome: "Tartari"},
+    {id:4, nome: "Mockado"},
+  ];
+  imagens: any[] = [
+    {id:1, url: "teste url mockada no front"},
+    {id:2, url: "teste url mockada no front"},
+    {id:3, url: "teste url mockada no front"},
+  ];
 
   constructor(private service: ViasService, public dialogRef: MatDialogRef<ViasFormInsertComponent>,
     ) {
