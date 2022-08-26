@@ -2,7 +2,7 @@ import { ViasFormInsertComponent } from './../vias-form-insert/vias-form-insert.
 import { CardViasComponent } from './../card-vias/card-vias.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
-import { ViasService } from '../../services/vias.service';
+import { ViasService } from '../../services/vias/vias.service';
 import { Via } from '../../models/via.model';
 
 

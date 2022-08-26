@@ -1,4 +1,4 @@
-import { ViasService } from './services/vias.service';
+import { ViasService } from './services/vias/vias.service';
 import { Component } from '@angular/core';
 import { faHouse, faUsers, faHeart, faImages } from '@fortawesome/free-solid-svg-icons';
 

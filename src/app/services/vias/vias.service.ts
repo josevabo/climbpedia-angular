@@ -1,4 +1,4 @@
-import { Via } from './../models/via.model';
+import { Via } from './../../models/via.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';

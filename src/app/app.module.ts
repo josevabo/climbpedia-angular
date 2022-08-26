@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     FormsModule,
     ToastrModule.forRoot(),
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

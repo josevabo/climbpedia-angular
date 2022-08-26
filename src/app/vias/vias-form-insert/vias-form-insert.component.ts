@@ -1,7 +1,11 @@
-import { ViasService } from './../../services/vias.service';
+import { SetoresService } from './../../services/setores/setores.service';
+import { ViasService } from './../../services/vias/vias.service';
 import { Via } from './../../models/via.model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogClose, MatDialogRef } from '@angular/material/dialog';
+import { ImagensService } from 'src/app/services/imagens/imagens.service';
+import { ConquistadoresService } from 'src/app/services/conquistadores/conquistadores.service';
+import { TiposViaService } from 'src/app/services/tipos-via/tipos-via.service';
 
 @Component({
   selector: 'app-vias-form-insert',

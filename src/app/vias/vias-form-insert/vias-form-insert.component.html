@@ -1,16 +1,30 @@
-<h2 mat-dialog-title>Cadastrar nova via</h2>
+<div mat-dialog-title style="display: inline-flex;width: 100%;justify-content: space-between;">
+  <h2 >Cadastrar nova via</h2>
+  <button matSuffix mat-button mat-dialog-close style="position: relative;float: right;">
+    <mat-icon class="scale-hover" [inline]="true" >close</mat-icon>
+  </button>
+</div>
 <form name="form-insert-via" class="" (submit)="insertVia()">
-  <mat-form-field >
+  <mat-form-field style="width:50%;">
     <mat-label>Nome</mat-label>
     <input matInput [(ngModel)]="via.nome"  name="nome">
   </mat-form-field>
-  <mat-form-field >
-    <mat-label>Descrição</mat-label>
-    <input matInput [(ngModel)]="via.descricao"  name="descricao">
+  <mat-form-field  style="width:20%;">
+    <mat-label>Tipo de Via</mat-label>
+    <mat-select [(ngModel)]="via.tipoVia.id" name="tipoVia_id">
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let tipoVia of tiposVia" [value]="tipoVia.id">
+        {{tipoVia.nome}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
-  <mat-form-field >
+  <mat-form-field  style="width:20%;">
     <mat-label>Graduação</mat-label>
     <input matInput [(ngModel)]="via.graduacao"  name="graduacao">
+  </mat-form-field>
+  <mat-form-field  style="width:50%;">
+    <mat-label>Descrição</mat-label>
+    <textarea matInput [(ngModel)]="via.descricao"  name="descricao"></textarea>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Setor</mat-label>
@@ -18,15 +32,6 @@
       <mat-option>--</mat-option>
       <mat-option *ngFor="let setor of setores" [value]="setor.id">
         {{setor.nome}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field >
-    <mat-label>Tipo de Via</mat-label>
-    <mat-select [(ngModel)]="via.tipoVia.id" name="tipoVia_id">
-      <mat-option>--</mat-option>
-      <mat-option *ngFor="let tipoVia of tiposVia" [value]="tipoVia.id">
-        {{tipoVia.nome}}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -58,16 +63,18 @@
   </mat-form-field>
   <mat-form-field >
     <mat-label>Data Conquista</mat-label>
-    <input matInput [(ngModel)]="via.dtConquista"  name="dtConquista">
+    <!-- <input matInput [(ngModel)]="via.dtConquista"  name="dtConquista"> -->
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="via.dtConquista"  name="dtConquista">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Extensao</mat-label>
     <input matInput [(ngModel)]="via.extensao"  name="extensao">
   </mat-form-field>
-  <mat-dialog-actions>
-    <button matSuffix mat-stroked-button mat-dialog-close style="position: relative;float: right;">
-      <mat-icon class="scale-hover" [inline]="true" >close</mat-icon>Fechar
-    </button>
+  <mat-dialog-actions style="flex-flow: row-reverse;">
     <button matSuffix mat-stroked-button color="primary" type="submit" style="position: relative;float: right;" [mat-dialog-close]="true">
       Salvar <mat-icon class="scale-hover">save</mat-icon>
     </button>
