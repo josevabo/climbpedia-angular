@@ -60,19 +60,6 @@ export class ViasService {
   }
 
   insertVia(via: Via): Observable<any> {
-    // const bodyTest = {
-    //   nome: "Buracos 4 com log, teste usando front com viasService e body do post mockado",
-    //   setor: {id:2},
-    //   graduacao:"V0",
-    //   tipoVia: {id:2},
-    //   urlCroqui:"url buracos",
-    //   imagem:{id:2},
-    //   tags:"#boulder",
-    //   conquistador: {id:5},
-    //   descricao:"Boulder bem da hora bom para iniciantes",
-    //   dtConquista: null,
-    //   extensao: 4
-    // }
     console.log("Executando insertVia:")
     console.log(via)
     return this.httpClient.post<any[]>(this.viasEndpoint, via)
