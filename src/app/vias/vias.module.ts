@@ -17,6 +17,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ViasFormInsertComponent } from './vias-form-insert/vias-form-insert.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { ViasDetailPageComponent } from './vias-detail-page/vias-detail-page.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     CardViasComponent,
     ViasHomeComponent,
     ViasFormInsertComponent,
+    ViasDetailPageComponent,
   ],
   imports: [
     CommonModule,
@@ -42,9 +44,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     ViasHomeComponent,
   ],
   providers: [
-    ViasService,
-    SetoresService,
-    ImagensService,
+    // ViasService,
+    // SetoresService,
+    // ImagensService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ],
   bootstrap: [ViasHomeComponent]

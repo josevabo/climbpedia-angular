@@ -1,3 +1,4 @@
+import { ViasDetailPageComponent } from './vias/vias-detail-page/vias-detail-page.component';
 import { GaleriaHomeComponent } from './galeria/galeria-home/galeria-home.component';
 import { FavoritosHomeComponent } from './favoritos/favoritos-home/favoritos-home.component';
 import { ForumHomeComponent } from './forum/forum-home/forum-home.component';
@@ -7,7 +8,9 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const ROUTES: Routes = [
-  {path: "vias", component: ViasHomeComponent},
+  {path: "vias", component: ViasHomeComponent, children: [
+  ]},
+  {path: "vias/:id", component: ViasDetailPageComponent},
   {path: "forum", component: ForumHomeComponent},
   {path: "favoritos", component: FavoritosHomeComponent},
   {path: "galeria", component: GaleriaHomeComponent},
