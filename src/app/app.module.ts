@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { GaleriaHomeComponent } from './galeria/galeria-home/galeria-home.component';
 import { FavoritosHomeComponent } from './favoritos/favoritos-home/favoritos-home.component';
@@ -36,6 +37,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDialogModule,
     MatNativeDateModule
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

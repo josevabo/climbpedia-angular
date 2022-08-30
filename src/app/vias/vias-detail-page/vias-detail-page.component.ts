@@ -1,5 +1,7 @@
+import { ViasService } from './../../services/vias/vias.service';
 import { Via } from './../../models/via.model';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-vias-detail-page',
@@ -7,10 +9,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./vias-detail-page.component.scss']
 })
 export class ViasDetailPageComponent implements OnInit {
-
-  @Input() via: any;
-  constructor() {
-    //stub
+  via: Via;
+  // @Input() via: any;
+  constructor(private viasService: ViasService,   private route: ActivatedRoute,
+    ) {
+    // //stub
     this.via = {
       "id": 1,
       "conquistador": {
@@ -21,7 +24,7 @@ export class ViasDetailPageComponent implements OnInit {
       },
       "descricao": "Via linda, n├úo muito longa. Crux exige m├│vel como prote├º├úo para iniciantes",
       "dtConquista": null,
-      "extensao": null,
+      "extensao": undefined,
       "imagem": {
           "id": 2,
           "legenda": "Foto Corcovado",
@@ -48,6 +51,14 @@ export class ViasDetailPageComponent implements OnInit {
       },
       "urlCroqui": "---www.urlteste.climb.com"
     }
+    // this.via = {}
+
+    this.getVia()
+  }
+
+  getVia(){
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.viasService.getViaById(id).subscribe(via => this.via = via)
   }
 
   ngOnInit(): void {

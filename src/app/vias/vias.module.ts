@@ -2,7 +2,7 @@ import { ImagensService } from 'src/app/services/imagens/imagens.service';
 import { SetoresService } from './../services/setores/setores.service';
 import { ViasService } from './../services/vias/vias.service';
 import { FormsModule } from '@angular/forms';
-// import { RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardViasComponent } from './card-vias/card-vias.component';
@@ -18,6 +18,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ViasFormInsertComponent } from './vias-form-insert/vias-form-insert.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ViasDetailPageComponent } from './vias-detail-page/vias-detail-page.component';
+
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ViasDetailPageComponent } from './vias-detail-page/vias-detail-page.com
     MatButtonModule,
     MatDialogModule,
     MatSelectModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    RouterModule
   ],
   exports: [
     CardViasComponent,
