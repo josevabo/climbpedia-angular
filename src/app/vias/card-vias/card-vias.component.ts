@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { ViasService } from './../../services/vias/vias.service';
-import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faSolidHeart, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { faHeart as faEmptyHeart } from '@fortawesome/free-regular-svg-icons';
 
@@ -16,6 +16,7 @@ export class CardViasComponent implements OnInit {
   urlImgDefault = "https://www.escaladas.com.br/img/dinamica/via/1033/principal/1033-160419-1.png";
   faEmptyHeart = faEmptyHeart;
   faSolidHeart = faSolidHeart;
+  faPlus = faPlus;
   @Input() via: any;
 
   constructor(private viasService: ViasService, private toastr: ToastrService) {

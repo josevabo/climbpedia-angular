@@ -18,6 +18,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { ViasFormInsertComponent } from './vias-form-insert/vias-form-insert.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ViasDetailPageComponent } from './vias-detail-page/vias-detail-page.component';
+import { ViasFavoritasComponent } from './vias-favoritas/vias-favoritas.component';
 
 
 
@@ -27,6 +28,7 @@ import { ViasDetailPageComponent } from './vias-detail-page/vias-detail-page.com
     ViasHomeComponent,
     ViasFormInsertComponent,
     ViasDetailPageComponent,
+    ViasFavoritasComponent,
   ],
   imports: [
     CommonModule,

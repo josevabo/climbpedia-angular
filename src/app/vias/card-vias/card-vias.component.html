@@ -1,19 +1,21 @@
 <div class="card">
   <!-- <div class="card-image" style="background-image:url({{via.urlImg}});"></div> -->
-  <div class="card-image">
-    <!-- <img src="https://www.escaladas.com.br/img/dinamica/via/1033/principal/1033-160419-1.png"> -->
-    <img src="{{via.imagem.url}}">
+  <div class="card-content">
+    <div class="card-image">
+      <!-- <img src="https://www.escaladas.com.br/img/dinamica/via/1033/principal/1033-160419-1.png"> -->
+      <img src="{{via.imagem.url}}">
+    </div>
+    <div class="card-text-area">
+      <span class="card-title">{{via.nome}}</span>
+      <p class="card-description">{{via.descricao}}</p>
+    </div>
   </div>
-  <div class="card-text-area">
-    <span class="card-title">{{via.nome}}</span>
-    <p class="card-description">{{via.descricao}}</p>
-  </div>
-  <div class="right-area">
+  <div class="right-area" style="flex-direction: column;justify-content: space-between;">
     <button favorite-button  (click)="togglefavorite()" class="card-favorite-button scale-hover">
       <fa-icon [icon]="via.isFavorita ? faSolidHeart : faEmptyHeart"></fa-icon>
     </button>
-  </div>
-  <div class="detail-link">
-    <a routerLink="/vias/{{via.id}}" routerLinkActive="router-link-active">Detalhes</a>
+    <!-- <button > -->
+      <a routerLink="/vias/{{via.id}}" class="detail-link"><fa-icon [icon]="faPlus"></fa-icon>&nbsp;Detalhes</a>
+    <!-- </button> -->
   </div>
 </div>
