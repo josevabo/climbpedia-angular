@@ -1,6 +1,11 @@
-<div class="galeria">
+<div class="galeria" style="flex: auto;flex-wrap: wrap;">
   <div *ngFor="let imagem of imagens" class="imagem-galeria">
-    <img id="img-{{imagem.id}}" src="{{imagem.url}}" alt="{{imagem.legenda}}">
-    <label for="img-{{imagem.id}}">{{imagem.legenda}}</label>
+    <div class="img-container">
+      <img id="img-{{imagem.id}}" src="{{imagem.url}}" alt="{{imagem.legenda}}">
+    </div>
+    <div class="legenda">
+      <p>{{imagem.legenda}}</p>
+      <span>+ Visualizar</span>
+    </div>
   </div>
 </div>
