@@ -19,8 +19,12 @@ export class CardViasComponent implements OnInit {
   faPlus = faPlus;
   @Input() via: any;
 
-  constructor(private viasService: ViasService, private toastr: ToastrService) {
+  constructor(private viasService: ViasService, private toastr: ToastrService) {}
 
+  ngOnInit(): void {
+    if (this.isNullOrIdIsNull(this.via.imagem)) {
+      this.via.imagem = {url: this.urlImgDefault}
+    }
   }
 
   togglefavorite(){
@@ -57,12 +61,6 @@ export class CardViasComponent implements OnInit {
   toggleFavoriteError(toastMessage: string, err: any){
     this.toastr.error(toastMessage)
     console.error(err)
-  }
-
-  ngOnInit(): void {
-    if (this.isNullOrIdIsNull(this.via.imagem)) {
-      this.via.imagem = {url: this.urlImgDefault}
-    }
   }
 
   isNullOrIdIsNull(obj: any){

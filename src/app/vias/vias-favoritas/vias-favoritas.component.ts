@@ -14,7 +14,10 @@ export class ViasFavoritasComponent implements OnInit {
 
   ngOnInit(): void {
     this.viasService.getViasFavoritasByUsuario().subscribe(
-      ids => console.log(ids)
+      vias => {
+        vias.forEach(via => via.isFavorita = true)
+        this.vias = vias
+      }
     )
   }
 

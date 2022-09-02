@@ -15,7 +15,7 @@
   </div>
 </header>
   <section id="nav-menu" style="font-weight: bold;">
-    <div class="nav-item button"  routerLinkActive="activebutton">
+    <div class="nav-item button"  routerLinkActive="activebutton" [routerLinkActiveOptions]="{ exact: true }">
       <a routerLink="/vias">
         <span style="padding: 0 5px;"><fa-icon [icon]="faHouse"></fa-icon></span>
         <span>Home</span>

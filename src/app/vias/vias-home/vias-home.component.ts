@@ -53,7 +53,7 @@ export class ViasHomeComponent implements OnInit {
   }
 
   getViasFavoritasByUsuario() {
-    return this.viasService.getViasFavoritasByUsuario()
+    return this.viasService.getViasFavoritasIdsByUsuario()
   }
 
   openInsertDialog() {

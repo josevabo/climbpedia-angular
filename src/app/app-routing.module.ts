@@ -11,9 +11,9 @@ import { RouterModule, Routes } from '@angular/router';
 const ROUTES: Routes = [
   {path: "vias", component: ViasHomeComponent, children: [
   ]},
+  {path: "vias/favoritas", component: ViasFavoritasComponent},
   {path: "vias/:id", component: ViasDetailPageComponent},
   {path: "forum", component: ForumHomeComponent},
-  {path: "vias/favoritas", component: ViasFavoritasComponent},
   {path: "galeria", component: GaleriaHomeComponent},
   {path: "", redirectTo: "/vias", pathMatch:"full"},
   {path: "**", redirectTo: "/vias", pathMatch:"full"},
