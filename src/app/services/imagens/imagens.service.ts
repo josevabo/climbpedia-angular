@@ -16,6 +16,7 @@ export class ImagensService {
   }
 
   getAllImagens(): Observable<any[]> {
+    console.log("getAllImagens()")
     return this.httpClient.get<any[]>(this.imagensEndpoint)
   }
 

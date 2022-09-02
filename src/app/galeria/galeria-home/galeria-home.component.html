@@ -1,1 +1,6 @@
-<p style="text-align: center;">Galeria coming soon!</p>
+<div class="galeria">
+  <div *ngFor="let imagem of imagens" class="imagem-galeria">
+    <img id="img-{{imagem.id}}" src="{{imagem.url}}" alt="{{imagem.legenda}}">
+    <label for="img-{{imagem.id}}">{{imagem.legenda}}</label>
+  </div>
+</div>
