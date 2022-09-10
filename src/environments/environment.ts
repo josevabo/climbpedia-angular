@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiEndpointUrl: 'http://localhost:8080/api'
+  apiEndpointUrl: 'http://localhost:8080/api',
+  // authServiceUrl: 'http://localhost:8180/realms/quarkus/...'
+  authServiceUrl: 'http://localhost:8080/api'
 };
 
 /*
