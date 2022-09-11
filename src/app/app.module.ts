@@ -1,10 +1,12 @@
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { initializeKeycloak } from './core/auth/keycloak-init.factory';
+import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ViasModule } from './vias/vias.module';
 import { ForumModule } from './forum/forum.module';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -35,10 +37,17 @@ import { LoginComponent } from './login/login.component';
     ToastrModule.forRoot(),
     MatButtonModule,
     MatDialogModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    KeycloakAngularModule
   ],
   exports: [RouterModule, BrowserModule],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
