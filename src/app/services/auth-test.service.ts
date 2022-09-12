@@ -12,36 +12,24 @@ export class AuthTestService {
   constructor(private http: HttpClient) { }
 
   login(email: any, password: any): Observable<any> {
-    this.http.post<any>(this.authUrl + '/loginInterno', {email, password})
-    .pipe(
-      // tap(res => this.setSession),
-      tap(res => {
-        this.setSession(res);
-        console.log("Resposta login");
-        console.log(res);
-      }),
-      shareReplay(1)
-    )
-      // .subscribe(
-      // res => {
-      //   this.setSession(res);
-      //   console.log("Resposta login");
-      //   console.log(res);
-      // }
-    // )
-
-    return of(`Login com sucesso: email: ${email}, senha: ${password}`)
+    return this.http.post<any>(this.authUrl + '/loginInterno', {email, password})
+      .pipe(
+        tap(res => {
+          this.setSession(res);
+        }),
+        shareReplay(1)
+      )
   }
 
   private setSession(authResult: any) {
     const expiresAt = moment().add(authResult.expiresIn,'second');
 
-    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('access_token', authResult.access_token);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
   }
 
   logout() {
-      localStorage.removeItem("id_token");
+      localStorage.removeItem("access_token");
       localStorage.removeItem("expires_at");
   }
 
@@ -59,4 +47,10 @@ export class AuthTestService {
       const expiresAt = JSON.parse(expiration);
       return moment(expiresAt);
   }
+
+  getToken() {
+    return localStorage.getItem('access_token');
+  }
+
+
 }

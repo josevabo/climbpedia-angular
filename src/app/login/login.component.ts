@@ -38,34 +38,25 @@ export class LoginComponent {
     }
 
     login() {
-        const val = this.form.value;
+      const val = this.form.value;
 
-        if (val.email && val.password) {
-            this.authService.login(val.email, val.password)
-                .subscribe(
-                    (response) => {
-                        console.log("User is logged in");
-                        console.log(response)
-                        this.router.navigateByUrl('/');
-                    }
-                );
-        }
+      if (val.email && val.password) {
+        this.authService.login(val.email, val.password)
+          .subscribe(
+            (response) => {
+              console.log("User is logged in");
+              console.log(response)
+              this.router.navigateByUrl('/');
+            }
+          );
+      }
+    }
+
+    redirectLoginOidcProvider(){
+      // window.location.href = 'http://localhost:54869/realms/quarkus/protocol/openid-connect/auth'
+      //   + "?client_id=" + 'backend-service'
+      //   + "&redirect_uri=" + "http%3A%2F%2Flocalhost%3A" + "4200"
+      window.location.href = 'http://localhost:54869/realms/quarkus/protocol/openid-connect/auth?client_id=backend-service&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin&response_type=code&response_mode=query&prompt=login'
     }
 }
 
-
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-login',
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.scss']
-// })
-// export class LoginComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
