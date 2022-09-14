@@ -2,6 +2,7 @@ import { ViasService } from './../../services/vias/vias.service';
 import { Via } from './../../models/via.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {MensagensService} from "../../core/mensagens.service";
 
 @Component({
   selector: 'app-vias-detail-page',
@@ -10,58 +11,35 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ViasDetailPageComponent implements OnInit {
   via: Via;
-  // @Input() via: any;
-  constructor(private viasService: ViasService,   private route: ActivatedRoute,
-    ) {
-    // //stub
-    this.via = {
-      "id": 1,
-      "conquistador": {
-          "id": 1,
-          "nome": "Andre Ilha",
-          "dataNasc": "1970-01-01T03:00:00.000+00:00",
-          "cidadeId": 1
-      },
-      "descricao": "Via linda, n├úo muito longa. Crux exige m├│vel como prote├º├úo para iniciantes",
-      "dtConquista": null,
-      "extensao": undefined,
-      "imagem": {
-          "id": 2,
-          "legenda": "Foto Corcovado",
-          "url": "https://static.wixstatic.com/media/4cf148_186b75eaa64f4430a75af9e5e9bfb735.png/v1/fill/w_250,h_187,al_c,q_95,enc_auto/4cf148_186b75eaa64f4430a75af9e5e9bfb735.png"
-      },
-      "graduacao": "3 grau D3 E2",
-      "nome": "K2",
-      "setor": {
-          "id": 2,
-          "nome": "Corcovado",
-          "descricao": "Montanha do corcovado. Vias fixas, mas maioria exige m├│vel",
-          "cidade": {
-              "id": 1,
-              "nome": "Rio de Janeiro",
-              "uf": "RJ"
-          },
-          "geolocalizacao": null
-      },
-      "tags": "#top100#movelopcional",
-      "tipoVia": {
-          "id": 1,
-          "nome": "Tradicional",
-          "descricao": "Vias de estilo mais cl├íssicos, demandam mais de uma cordada para alcan├ºar o fim"
-      },
-      "urlCroqui": "---www.urlteste.climb.com"
-    }
-    // this.via = {}
+  status?: number;
+  readonly id: number = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.getVia()
+  constructor(private viasService: ViasService,   private route: ActivatedRoute, private mensagensService: MensagensService) {
+    this.via = {};
   }
 
   getVia(){
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.viasService.getViaById(id).subscribe(via => this.via = via)
+    // const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.viasService.getViaById(this.id).subscribe({
+      next: (via) => { this.via = via; console.log("recebido como sucesso")},
+      error:(err) => {
+        this.status = err.status
+        switch (this.status){
+          case 401: this.mensagensService.mensagemErro(`Falha na autenticação. Erro de login: ${this.status}`);break;
+          case 403: this.mensagensService.mensagemErro(`Usuário sem autorização de acesso ao recurso. Erro: ${this.status}`);break;
+          case 500: this.mensagensService.mensagemErro(`Erro no servidor: ${this.status}`);break;
+          default: this.mensagensService.mensagemErro(`Erro na consulta: ${this.status}`);
+        }
+      }
+    })
   }
 
   ngOnInit(): void {
+    this.getVia()
+  }
+
+  isEmpty(via: any): boolean {
+    return Object.keys(via).length > 0
   }
 
 }

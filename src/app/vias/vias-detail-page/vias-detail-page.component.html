@@ -1,16 +1,22 @@
-<h2>{{via.nome}}</h2>
-<div id="img-container">
-  <img src="{{via.imagem.url}}" alt="imagem da via {{via.nome}}">
-  <p>{{via.imagem.legenda}}</p>
+<div *ngIf="isEmpty(via)">
+  <h2>{{via.nome}}</h2>
+  <div id="img-container">
+    <img src="{{via.imagem.url}}" alt="imagem da via {{via.nome}}">
+    <p>{{via.imagem.legenda}}</p>
+  </div>
+  <p>{{via.descricao}}</p>
+  <p>Setor: {{via.setor.nome}}</p>
+  <p>Conquistador: {{via.conquistador.nome}}</p>
+  <p>graduacao: {{via.graduacao}}</p>
+  <p>dtConquista: {{via.dtConquista}}</p>
+  <p>extensao: {{via.extensao}}</p>
+  <p>tags: {{via.tags}}</p>
+  <p>tipoVia: {{via.tipoVia.nome}}</p>
+  <p>urlCroqui: {{via.urlCroqui}}</p>
+  <p>tags: {{via.tags}}</p>
+  <p>isFavorita: {{via.isFavorita}}</p>
 </div>
-<p>{{via.descricao}}</p>
-<p>Setor: {{via.setor.nome}}</p>
-<p>Conquistador: {{via.conquistador.nome}}</p>
-<p>graduacao: {{via.graduacao}}</p>
-<p>dtConquista: {{via.dtConquista}}</p>
-<p>extensao: {{via.extensao}}</p>
-<p>tags: {{via.tags}}</p>
-<p>tipoVia: {{via.tipoVia}}</p>
-<p>urlCroqui: {{via.urlCroqui}}</p>
-<p>tags: {{via.tags}}</p>
-<p>isFavorita: {{via.isFavorita}}</p>
+<div *ngIf="!isEmpty(via)">
+  Erro na consulta da via. Erro {{status}}
+</div>
+
