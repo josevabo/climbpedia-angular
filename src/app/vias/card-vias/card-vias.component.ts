@@ -22,7 +22,7 @@ export class CardViasComponent implements OnInit {
   constructor(private viasService: ViasService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    if (this.isNullOrIdIsNull(this.via.imagem)) {
+    if (this.isNullOrPropertyIsNull(this.via.imagem, "url")) {
       this.via.imagem = {url: this.urlImgDefault}
     }
   }
@@ -63,8 +63,8 @@ export class CardViasComponent implements OnInit {
     console.error(err)
   }
 
-  isNullOrIdIsNull(obj: any){
-    return obj == null || obj.id ==null
+  isNullOrPropertyIsNull(obj: any, prop: string){
+    return obj == null || !obj.hasOwnProperty(prop) || obj[prop] == null
   }
 
 }
