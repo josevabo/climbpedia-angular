@@ -2,6 +2,8 @@ import { AuthTestService } from './../services/auth-test.service';
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import {AuthService} from "../services/auth.service";
+import {MensagensService} from "../core/mensagens.service";
 
 @Component({
   selector: 'login',
@@ -28,8 +30,9 @@ export class LoginComponent {
     form:FormGroup;
 
     constructor(private fb:FormBuilder,
-                 private authService: AuthTestService,
-                 private router: Router) {
+                 private authService: AuthService,
+                 private router: Router,
+                private mensagensService: MensagensService) {
 
         this.form = this.fb.group({
             email: ['',Validators.required],
@@ -41,15 +44,27 @@ export class LoginComponent {
       const val = this.form.value;
 
       if (val.email && val.password) {
-        this.authService.login(val.email, val.password)
-          .subscribe(
-            (response) => {
-              console.log("User is logged in");
-              console.log(response)
-              this.router.navigateByUrl('/');
-            }
-          );
+        // console.log(this.authService.login(val.email, val.password, (result:any) => {}).then(result=> console.log(result)));
+        console.log(this.authService.login(val.email, val.password, (result:any) => {}).subscribe(result=> console.log(result)));
+        // console.log(this.authService.login(val.email, val.password, (result:any) => {
+        //   if (result) this.router.navigateByUrl('/');
+        //   else this.mensagensService.mensagemErro("Falha no Login. Por favor, tente novamente")
+        // }))
+        this.authService.login(val.email, val.password, (result:any) => {}).subscribe(result => {
+          if (result) this.loginSuccess();
+          else this.loginFail()
+        })
+
       }
+    }
+
+    loginSuccess() {
+      this.mensagensService.mensagemSuccess("Login bem sucedido!")
+      this.router.navigateByUrl('/')
+    }
+
+    loginFail() {
+      this.mensagensService.mensagemErro("Falha no Login.\n Por favor, tente novamente")
     }
 
     redirectLoginOidcProvider(){
