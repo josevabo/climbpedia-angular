@@ -2,7 +2,7 @@ import { ViasService } from './../../services/vias/vias.service';
 import { Via } from './../../models/via.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {MensagensService} from "../../core/mensagens.service";
+import {AlertService} from "../../core/alert.service";
 
 @Component({
   selector: 'app-vias-detail-page',
@@ -14,7 +14,7 @@ export class ViasDetailPageComponent implements OnInit {
   status?: number;
   readonly id: number = Number(this.route.snapshot.paramMap.get('id'));
 
-  constructor(private viasService: ViasService,   private route: ActivatedRoute, private mensagensService: MensagensService) {
+  constructor(private viasService: ViasService,   private route: ActivatedRoute, private alertService: AlertService) {
     this.via = {};
   }
 
@@ -25,10 +25,10 @@ export class ViasDetailPageComponent implements OnInit {
       error:(err) => {
         this.status = err.status
         switch (this.status){
-          case 401: this.mensagensService.mensagemErro(`Falha na autenticação. Erro de login: ${this.status}`);break;
-          case 403: this.mensagensService.mensagemErro(`Usuário sem autorização de acesso ao recurso. Erro: ${this.status}`);break;
-          case 500: this.mensagensService.mensagemErro(`Erro no servidor: ${this.status}`);break;
-          default: this.mensagensService.mensagemErro(`Erro na consulta: ${this.status}`);
+          case 401: this.alertService.alertError(`Falha na autenticação. Erro de login: ${this.status}`);break;
+          case 403: this.alertService.alertError(`Usuário sem autorização de acesso ao recurso. Erro: ${this.status}`);break;
+          case 500: this.alertService.alertError(`Erro no servidor: ${this.status}`);break;
+          default: this.alertService.alertError(`Erro na consulta: ${this.status}`);
         }
       }
     })

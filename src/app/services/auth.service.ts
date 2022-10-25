@@ -2,34 +2,39 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {observable, Observable} from "rxjs";
+import jwtDecode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   authServiceUrl: string = environment.authServiceUrl;
-  private _isLoggedIn: boolean = false;
-  accessTokenName: string = "accessToken"
+  accessTokenName: string = "access_token"
+  idTokenName: string = "id_token"
+  refreshTokenName: string = "refresh_token"
+  expiresAtName: string = "expires_at"
 
   constructor(private httpClient: HttpClient) { }
 
-  login(email:string, password:string, callback:Function): Observable<boolean> {
-     const observable = new Observable<boolean>( (observer) => {
-      this.httpClient.post(this.authServiceUrl,{username:email,password:password},{responseType:"text"})
-          .subscribe(
-            accessToken => {
-              console.log(accessToken)
-              localStorage.setItem('accessToken',accessToken)
-              this._isLoggedIn = true
-              console.log(this.isLoggedIn())
-              observer.next(this.isLoggedIn())
-              // callback(this.isLoggedIn())
+  login(email:string, password:string): Observable<any> {
+     const observable = new Observable<any>( (observer) => {
+      this.httpClient.post(this.authServiceUrl,{username:email,password:password},{responseType:"json"})
+          .subscribe({
+            next: (token: any) => {
+              console.log(token)
+              localStorage.setItem(this.accessTokenName, token[this.accessTokenName])
+              localStorage.setItem(this.idTokenName, token[this.idTokenName])
+              localStorage.setItem(this.refreshTokenName, token[this.refreshTokenName])
+              localStorage.setItem(this.expiresAtName, token[this.expiresAtName])
+
+              const idTokenDecoded = this.decodeToken(token[this.idTokenName]);
+              observer.next(idTokenDecoded)
             },
-            error => {
+            error: error => {
               console.log(error)
               observer.next(false)
             }
-          )
+          })
       }
     )
 
@@ -42,10 +47,22 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.accessTokenName)
-    this._isLoggedIn = false;
+    localStorage.removeItem(this.idTokenName)
+    localStorage.removeItem(this.refreshTokenName)
+    localStorage.removeItem(this.expiresAtName)
   }
 
   isLoggedIn(): boolean {
-    return this._isLoggedIn;
+    return !!localStorage.getItem(this.idTokenName)
+  }
+
+  decodeToken(token: string): string {
+    return jwtDecode(token)
+  }
+
+  getUserName(): String | undefined {
+    const idToken = localStorage.getItem(this.idTokenName);
+    if(idToken) return this.decodeToken(idToken);
+    else return undefined;
   }
 }

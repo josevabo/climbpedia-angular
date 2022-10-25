@@ -1,9 +1,8 @@
-import { AuthTestService } from './../services/auth-test.service';
-import { Component } from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import {AuthService} from "../services/auth.service";
-import {MensagensService} from "../core/mensagens.service";
+import {AlertService} from "../core/alert.service";
 
 @Component({
   selector: 'login',
@@ -28,11 +27,12 @@ import {MensagensService} from "../core/mensagens.service";
 </form>`})
 export class LoginComponent {
     form:FormGroup;
+    @Output() onUsernameChange = new EventEmitter<String>()
 
     constructor(private fb:FormBuilder,
                  private authService: AuthService,
                  private router: Router,
-                private mensagensService: MensagensService) {
+                private alertService: AlertService) {
 
         this.form = this.fb.group({
             email: ['',Validators.required],
@@ -44,34 +44,35 @@ export class LoginComponent {
       const val = this.form.value;
 
       if (val.email && val.password) {
-        // console.log(this.authService.login(val.email, val.password, (result:any) => {}).then(result=> console.log(result)));
-        console.log(this.authService.login(val.email, val.password, (result:any) => {}).subscribe(result=> console.log(result)));
-        // console.log(this.authService.login(val.email, val.password, (result:any) => {
-        //   if (result) this.router.navigateByUrl('/');
-        //   else this.mensagensService.mensagemErro("Falha no Login. Por favor, tente novamente")
-        // }))
-        this.authService.login(val.email, val.password, (result:any) => {}).subscribe(result => {
-          if (result) this.loginSuccess();
-          else this.loginFail()
+        this.authService.login(val.email, val.password).subscribe({
+          next: idToken => {
+            if (idToken) {
+              this.loginSuccess();
+              let username = idToken.full_name;
+              this.onUsernameChange.emit(username)
+            }
+            else this.loginFail()
+          },
+          error: error => this.loginFail()
         })
-
+      } else {
+        this.alertService.alertWarning("Campos de login são obrigatórios!")
+        this.highlightInvalidFields()
       }
     }
 
-    loginSuccess() {
-      this.mensagensService.mensagemSuccess("Login bem sucedido!")
+    private loginSuccess() {
+      this.alertService.alertSuccess("Login bem sucedido!")
       this.router.navigateByUrl('/')
     }
 
-    loginFail() {
-      this.mensagensService.mensagemErro("Falha no Login.\n Por favor, tente novamente")
+    private loginFail() {
+      this.alertService.alertError("Falha no Login. Por favor, tente novamente")
     }
 
-    redirectLoginOidcProvider(){
-      // window.location.href = 'http://localhost:54869/realms/quarkus/protocol/openid-connect/auth'
-      //   + "?client_id=" + 'backend-service'
-      //   + "&redirect_uri=" + "http%3A%2F%2Flocalhost%3A" + "4200"
-      window.location.href = 'http://localhost:54869/realms/quarkus/protocol/openid-connect/auth?client_id=backend-service&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin&response_type=code&response_mode=query&prompt=login'
+    private highlightInvalidFields() {
+      // TODO: criar estrutura para destacar apenas campos invalidos
+      // usar classes css, estudar validadores
     }
-}
+  }
 

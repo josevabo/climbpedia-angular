@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 })
 export class ViasService {
 
-
+  private readonly AUTH_HEADER = {'Authorization': ''}; // credentials will be set by interceptor
   private readonly viasEndpoint = environment.apiEndpointUrl + "/vias"
   vias: Via[];
   viasFavoritasIdList: any[];
@@ -37,7 +37,7 @@ export class ViasService {
   }
 
   addFavorite(viaId: number, userId: number): Observable<any> {
-    return this.httpClient.post<any>(this.viasEndpoint + "/favoritos/" + viaId, null);
+    return this.httpClient.post<any>(this.viasEndpoint + "/favoritos/" + viaId, null, {headers: this.AUTH_HEADER});
     let mocked = true
     return of(mocked)
   }
@@ -47,7 +47,7 @@ export class ViasService {
     // let params = new HttpParams()
     const usuarioId = 1;
     // params = params.append('usuario', usuarioId);
-    return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId)
+    return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId, {headers: this.AUTH_HEADER})
   }
 
   getViasFavoritasByUsuario() {
@@ -55,11 +55,11 @@ export class ViasService {
     // let params = new HttpParams()
     const usuarioId = 1;
     // params = params.append('usuario', usuarioId);
-    return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId)
+    return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId, {headers: this.AUTH_HEADER})
   }
 
   removeFavorite(viaId: number, userId: number): Observable<any> {
-    return this.httpClient.delete<any>(this.viasEndpoint + "/favoritos/" + viaId);
+    return this.httpClient.delete<any>(this.viasEndpoint + "/favoritos/" + viaId, {headers: this.AUTH_HEADER});
     // let mocked = true
     // return of(mocked)
   }
@@ -73,7 +73,7 @@ export class ViasService {
   insertVia(via: Via): Observable<any> {
     console.log("Executando insertVia:")
     console.log(via)
-    return this.httpClient.post<any[]>(this.viasEndpoint, via)
+    return this.httpClient.post<any[]>(this.viasEndpoint, via, {headers: this.AUTH_HEADER})
 
   }
 

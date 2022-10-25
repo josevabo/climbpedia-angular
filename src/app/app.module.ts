@@ -17,6 +17,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LoginComponent } from './login/login.component';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,
     MatDialogModule,
     MatNativeDateModule,
-    KeycloakAngularModule
+    // KeycloakAngularModule,
+    MatMenuModule
   ],
   exports: [RouterModule, BrowserModule],
   providers: [
