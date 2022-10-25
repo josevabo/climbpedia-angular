@@ -1,8 +1,8 @@
-import { Via } from './../../models/via.model';
+import { Via } from '../../models/via.model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,35 +38,27 @@ export class ViasService {
 
   addFavorite(viaId: number, userId: number): Observable<any> {
     return this.httpClient.post<any>(this.viasEndpoint + "/favoritos/" + viaId, null, {headers: this.AUTH_HEADER});
-    let mocked = true
-    return of(mocked)
   }
 
   getViasFavoritasIdsByUsuario() {
     const url = this.viasEndpoint + "/favoritos/ids"
-    // let params = new HttpParams()
     const usuarioId = 1;
-    // params = params.append('usuario', usuarioId);
     return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId, {headers: this.AUTH_HEADER})
   }
 
   getViasFavoritasByUsuario() {
     const url = this.viasEndpoint + "/favoritos"
-    // let params = new HttpParams()
     const usuarioId = 1;
-    // params = params.append('usuario', usuarioId);
     return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId, {headers: this.AUTH_HEADER})
   }
 
   removeFavorite(viaId: number, userId: number): Observable<any> {
     return this.httpClient.delete<any>(this.viasEndpoint + "/favoritos/" + viaId, {headers: this.AUTH_HEADER});
-    // let mocked = true
-    // return of(mocked)
   }
 
   setViaFavorita() {
     this.vias.forEach((via)=>{
-      via.isFavorita = this.viasFavoritasIdList.includes(via.id) ? true : false;
+      via.isFavorita = this.viasFavoritasIdList.includes(via.id);
     })
   }
 

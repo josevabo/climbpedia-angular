@@ -4,7 +4,6 @@ import { ViasDetailPageComponent } from './vias/vias-detail-page/vias-detail-pag
 import { ForumHomeComponent } from './forum/forum-home/forum-home.component';
 import { ViasHomeComponent } from './vias/vias-home/vias-home.component';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const ROUTES: Routes = [

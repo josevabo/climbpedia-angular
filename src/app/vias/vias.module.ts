@@ -1,6 +1,3 @@
-import { ImagensService } from 'src/app/services/imagens/imagens.service';
-import { SetoresService } from './../services/setores/setores.service';
-import { ViasService } from './../services/vias/vias.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -48,9 +45,6 @@ import { ViasFavoritasComponent } from './vias-favoritas/vias-favoritas.componen
     ViasHomeComponent,
   ],
   providers: [
-    // ViasService,
-    // SetoresService,
-    // ImagensService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ],
   bootstrap: [ViasHomeComponent]

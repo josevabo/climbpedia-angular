@@ -1,5 +1,4 @@
-import { ViasFormInsertComponent } from './../vias-form-insert/vias-form-insert.component';
-import { CardViasComponent } from './../card-vias/card-vias.component';
+import { ViasFormInsertComponent } from '../vias-form-insert/vias-form-insert.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { ViasService } from '../../services/vias/vias.service';
@@ -46,7 +45,7 @@ export class ViasHomeComponent implements OnInit {
     this.getViasFavoritasByUsuario().subscribe({
       next: (viasFavoritasId: any[]) => {
         vias.forEach(via => {
-          via.isFavorita = viasFavoritasId.includes(via.id) ? true : false
+          via.isFavorita = viasFavoritasId.includes(via.id);
         })
         this.vias = vias;
         console.log("Update vias:")

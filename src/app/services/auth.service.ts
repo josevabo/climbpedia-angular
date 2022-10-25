@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
-import {observable, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import jwtDecode from "jwt-decode";
 
 @Injectable({
@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
   login(email:string, password:string): Observable<any> {
-     const observable = new Observable<any>( (observer) => {
+     return new Observable<any>( (observer) => {
       this.httpClient.post(this.authServiceUrl,{username:email,password:password},{responseType:"json"})
           .subscribe({
             next: (token: any) => {
@@ -37,8 +37,6 @@ export class AuthService {
           })
       }
     )
-
-    return observable;
   }
 
   refreshToken() {
