@@ -16,6 +16,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LoginComponent } from './login/login.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 
 
@@ -38,7 +40,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatButtonModule,
     MatDialogModule,
     MatNativeDateModule,
-    MatMenuModule
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [RouterModule, BrowserModule],
   providers: [

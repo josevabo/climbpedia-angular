@@ -5,26 +5,10 @@ import {AuthService} from "../services/auth.service";
 import {AlertService} from "../core/alert.service";
 
 @Component({
-  selector: 'login',
-  template: `
-<form [formGroup]="form">
-    <fieldset>
-        <legend>Login</legend>
-        <div class="form-field">
-            <label>Email:</label>
-            <input name="email" formControlName="email">
-        </div>
-        <div class="form-field">
-            <label>Password:</label>
-            <input name="password" formControlName="password"
-                   type="password">
-        </div>
-    </fieldset>
-    <div class="form-buttons">
-        <button class="button button-primary"
-                (click)="login()">Login</button>
-    </div>
-</form>`})
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
 export class LoginComponent {
     form:FormGroup;
     @Output() onUsernameChange = new EventEmitter<String>()
@@ -53,7 +37,7 @@ export class LoginComponent {
             }
             else this.loginFail()
           },
-          error: error => this.loginFail()
+          error: () => this.loginFail()
         })
       } else {
         this.alertService.alertWarning("Campos de login são obrigatórios!")

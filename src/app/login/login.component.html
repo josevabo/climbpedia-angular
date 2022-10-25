@@ -1,1 +1,15 @@
-<p>login works!</p>
+<form name="form-login" [formGroup]="form">
+    <legend>Login</legend>
+    <mat-form-field class="form-field">
+      <mat-label>Email:</mat-label>
+      <input matInput name="email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <mat-label>Password:</mat-label>
+      <input matInput name="password" formControlName="password"
+             type="password">
+    </mat-form-field>
+    <mat-dialog-actions>
+      <button matSuffix mat-raised-button color="primary" (click)="login()">Login</button>
+    </mat-dialog-actions>
+</form>
