@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { faHouse, faUsers, faHeart, faImages } from '@fortawesome/free-solid-svg-icons';
+import { AlertService } from './core/alert.service';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class AppComponent {
   private initialUserName: string = "Efetue Login";
 
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private alertService: AlertService) {
     this.userName = this.initialUserName;
     this.isLoggedIn = authService.isLoggedIn();
   }
@@ -38,7 +39,10 @@ export class AppComponent {
   logout() {
     this.authService.logout()
     this.isLoggedIn = this.authService.isLoggedIn();
-    if(!this.isLoggedIn) this.changeUsername(this.initialUserName)
+    if(!this.isLoggedIn) {
+      this.changeUsername(this.initialUserName)
+      this.alertService.alertInfo("Logout com sucesso","Info", 2000)
+    }
   }
 
   ngOnInit() {
