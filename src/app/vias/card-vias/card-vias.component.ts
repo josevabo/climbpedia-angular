@@ -32,7 +32,7 @@ export class CardViasComponent implements OnInit {
   }
 
   addFavorite() {
-    this.viasService.addFavorite(this.via.id, this.userId).subscribe({
+    this.viasService.addFavorite(this.via.id).subscribe({
         next: (response) => {
           console.log("retorno addFavorito: ",response)
           return this.toggleFavoriteSuccess(true, "Adicionada aos favoritos com sucesso!")
@@ -42,7 +42,7 @@ export class CardViasComponent implements OnInit {
     }
 
   removeFavorite() {
-    this.viasService.removeFavorite(this.via.id, this.userId).subscribe({
+    this.viasService.removeFavorite(this.via.id).subscribe({
       next: (response) => {
       console.log("retorno removeFavorito: ",response)
         return this.toggleFavoriteSuccess(false, "Removida dos favoritos com sucesso!")

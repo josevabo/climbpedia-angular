@@ -1,6 +1,9 @@
-import { ViasService } from './../../services/vias/vias.service';
+import { ViasService } from '../../services/vias/vias.service';
 import { Component, OnInit } from '@angular/core';
 import { Via } from 'src/app/models/via.model';
+import {HttpErrorResponse} from "@angular/common/http";
+import {AlertService} from "../../core/alert.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-vias-favoritas',
@@ -9,16 +12,23 @@ import { Via } from 'src/app/models/via.model';
 })
 export class ViasFavoritasComponent implements OnInit {
   vias: Via[] = []
-
-  constructor(private viasService: ViasService) { }
+  isLoggedIn: boolean = false;
+  constructor(private viasService: ViasService, private alertService: AlertService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.viasService.getViasFavoritasByUsuario().subscribe(
-      vias => {
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.viasService.getViasFavoritasByUsuario().subscribe({
+      next: vias => {
         vias.forEach(via => via.isFavorita = true)
         this.vias = vias
+      },
+      error: error => {
+        console.log(error)
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 401) this.alertService.alertWarning("Necessário login para ver favoritos!")
+        }
       }
-    )
+    })
   }
 
 }

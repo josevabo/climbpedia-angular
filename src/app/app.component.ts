@@ -3,6 +3,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { faHouse, faUsers, faHeart, faImages } from '@fortawesome/free-solid-svg-icons';
 import { AlertService } from './core/alert.service';
 import { AuthService } from './services/auth.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,9 @@ export class AppComponent {
   private initialUserName: string = "Efetue Login";
 
 
-  constructor(private authService: AuthService, private alertService: AlertService) {
+  constructor(private authService: AuthService,
+              private alertService: AlertService,
+              private router: Router) {
     this.userName = this.initialUserName;
     this.isLoggedIn = authService.isLoggedIn();
   }
@@ -42,6 +45,7 @@ export class AppComponent {
     if(!this.isLoggedIn) {
       this.changeUsername(this.initialUserName)
       this.alertService.alertInfo("Logout com sucesso","Info", 2000)
+      this.router.navigateByUrl('/')
     }
   }
 

@@ -36,14 +36,13 @@ export class ViasService {
     return this.httpClient.get<any[]>(this.viasEndpoint, {params:params})
   }
 
-  addFavorite(viaId: number, userId: number): Observable<any> {
+  addFavorite(viaId: number): Observable<any> {
     return this.httpClient.post<any>(this.viasEndpoint + "/favoritos/" + viaId, null, {headers: this.AUTH_HEADER});
   }
 
   getViasFavoritasIdsByUsuario() {
     const url = this.viasEndpoint + "/favoritos/ids"
-    const usuarioId = 1;
-    return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId, {headers: this.AUTH_HEADER})
+    return this.httpClient.get<any[]>(url, {headers: this.AUTH_HEADER})
   }
 
   getViasFavoritasByUsuario() {
@@ -52,7 +51,7 @@ export class ViasService {
     return this.httpClient.get<any[]>(url + "?usuario=" + usuarioId, {headers: this.AUTH_HEADER})
   }
 
-  removeFavorite(viaId: number, userId: number): Observable<any> {
+  removeFavorite(viaId: number): Observable<any> {
     return this.httpClient.delete<any>(this.viasEndpoint + "/favoritos/" + viaId, {headers: this.AUTH_HEADER});
   }
 
