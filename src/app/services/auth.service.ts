@@ -9,12 +9,17 @@ import jwtDecode from "jwt-decode";
 })
 export class AuthService {
   authServiceUrl: string = environment.authServiceUrl;
+  usuarioServiceUrl: string = environment.apiEndpointUrl + "/usuarios"; //
   accessTokenName: string = "access_token"
   idTokenName: string = "id_token"
   refreshTokenName: string = "refresh_token"
   expiresAtName: string = "expires_at"
 
   constructor(private httpClient: HttpClient) { }
+
+  criarConta(dadosNovaConta: any): Observable<any> {
+    return this.httpClient.post(this.usuarioServiceUrl,dadosNovaConta);
+  }
 
   login(email:string, password:string): Observable<any> {
      return new Observable<any>( (observer) => {

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {AlertService} from "../core/alert.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {LoginFormCriarContaComponent} from "./form-criar-conta/login-form-criar-conta.component";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent {
     constructor(private fb:FormBuilder,
                  private authService: AuthService,
                  private router: Router,
-                private alertService: AlertService) {
+                private alertService: AlertService,
+                private dialog: MatDialog) {
 
         this.form = this.fb.group({
             email: ['',Validators.required],
@@ -43,6 +46,16 @@ export class LoginComponent {
         this.alertService.alertWarning("Campos de login são obrigatórios!")
         this.highlightInvalidFields()
       }
+    }
+
+    openCriarContaDialog() {
+      const dialogConfig: MatDialogConfig = {
+        disableClose : true,
+        autoFocus : true,
+        width : "700px"
+      }
+
+      const dialogRef = this.dialog.open(LoginFormCriarContaComponent, dialogConfig);
     }
 
     private loginSuccess() {

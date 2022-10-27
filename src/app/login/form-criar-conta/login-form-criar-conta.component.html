@@ -1,0 +1,46 @@
+<div mat-dialog-title style="display: inline-flex;width: 100%;justify-content: space-between;">
+  <h2 >Criar conta <mat-icon>add_account</mat-icon></h2>
+  <button matSuffix mat-button mat-dialog-close style="position: relative;float: right;">
+    <mat-icon class="scale-hover" [inline]="true" >close</mat-icon>
+  </button>
+</div>
+<form name="form-criar-conta" class=""  [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Nome Completo</mat-label>
+    <input matInput formControlName="nome"  name="nome">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Nome de usuário</mat-label>
+    <input matInput formControlName="username"  name="username">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email"  name="email">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Senha</mat-label>
+    <input matInput type="password" formControlName="senha"  name="senha">
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Data Nascimento</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dataNasc"  name="dataNasc">
+    <mat-hint>DD/MM/AAAA</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Cidade</mat-label>
+    <mat-select formControlName="cidadeId" name="cidadeId">
+      <mat-option>--</mat-option>
+      <mat-option *ngFor="let cidade of cidades" [value]="cidade.id">
+        {{cidade.nome}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-dialog-actions>
+    <button matSuffix mat-stroked-button color="primary" (click)="criarConta()" style="position: relative;float: right;" [mat-dialog-close]="true">
+      Salvar <mat-icon class="scale-hover">save</mat-icon>
+    </button>
+  </mat-dialog-actions>
+
+</form>

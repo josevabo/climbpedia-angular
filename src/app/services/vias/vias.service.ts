@@ -11,6 +11,7 @@ export class ViasService {
 
   private readonly AUTH_HEADER = {'Authorization': ''}; // credentials will be set by interceptor
   private readonly viasEndpoint = environment.apiEndpointUrl + "/vias"
+  private readonly cidadesEndpoint = environment.apiEndpointUrl + "/cidades"
   vias: Via[];
   viasFavoritasIdList: any[];
 
@@ -65,7 +66,9 @@ export class ViasService {
     console.log("Executando insertVia:")
     console.log(via)
     return this.httpClient.post<any[]>(this.viasEndpoint, via, {headers: this.AUTH_HEADER})
-
   }
 
+  getCidades(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.cidadesEndpoint);
+  }
 }

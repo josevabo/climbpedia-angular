@@ -3,6 +3,7 @@ export interface Usuario {
   username: string,
   email?: string,
   dataNasc?: Date | string,
+  senha: string,
   cidade?: {
     nome?: string,
     siglaUf?: string
