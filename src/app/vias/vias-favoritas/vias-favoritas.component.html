@@ -1,5 +1,6 @@
 <section id="content-area">
   <div id="main-content">
+    <div *ngIf="!isLoggedIn" > Necessário login para ver favoritos</div>
     <app-card-vias *ngFor="let via of vias" [via]="via"></app-card-vias>
   </div>
 </section>

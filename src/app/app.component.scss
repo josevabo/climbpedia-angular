@@ -8,11 +8,8 @@
   display: flex;
   height: 62px;
   justify-content: space-between;
-  padding: 0 20px;
-  padding-bottom: 0px;
-  padding-top: 5px;
+  padding: 5px 20px 0;
   width: inherit;
-  // text-align: center;
 }
 
 .nav__logo {
@@ -23,7 +20,6 @@
 }
 
 .logo-container {
-  // height: inherit;
   height: 100%;
 }
 
@@ -61,7 +57,6 @@
 }
 
 #nav-menu {
-  display:flex;
   display: flex;
   min-height: 56px;
   margin: 0;
@@ -89,7 +84,6 @@
 
   & a {
   text-decoration:none;
-  // color: #595959;
   color: var(--main-font-color);
   padding: 0 5px;
 
@@ -100,7 +94,6 @@
 }
 
 .filter-area {
-  display:flex;
   width:100%;
   justify-content: space-between;
   display: none;
@@ -116,4 +109,14 @@
   display:flex;
   flex-direction: column;
   max-width: 1000px;
+}
+
+button[mat-menu-item] {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+
+  mat-icon {
+    margin-right: 0 !important;
+  }
 }

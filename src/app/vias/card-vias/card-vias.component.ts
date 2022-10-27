@@ -1,7 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
-import { ViasService } from './../../services/vias/vias.service';
+import { ViasService } from '../../services/vias/vias.service';
 import { faHeart as faSolidHeart, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faHeart as faEmptyHeart } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
@@ -22,7 +22,7 @@ export class CardViasComponent implements OnInit {
   constructor(private viasService: ViasService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    if (this.isNullOrIdIsNull(this.via.imagem)) {
+    if (this.isNullOrPropertyIsNull(this.via.imagem, "url")) {
       this.via.imagem = {url: this.urlImgDefault}
     }
   }
@@ -32,7 +32,7 @@ export class CardViasComponent implements OnInit {
   }
 
   addFavorite() {
-    this.viasService.addFavorite(this.via.id, this.userId).subscribe({
+    this.viasService.addFavorite(this.via.id).subscribe({
         next: (response) => {
           console.log("retorno addFavorito: ",response)
           return this.toggleFavoriteSuccess(true, "Adicionada aos favoritos com sucesso!")
@@ -42,7 +42,7 @@ export class CardViasComponent implements OnInit {
     }
 
   removeFavorite() {
-    this.viasService.removeFavorite(this.via.id, this.userId).subscribe({
+    this.viasService.removeFavorite(this.via.id).subscribe({
       next: (response) => {
       console.log("retorno removeFavorito: ",response)
         return this.toggleFavoriteSuccess(false, "Removida dos favoritos com sucesso!")
@@ -63,8 +63,8 @@ export class CardViasComponent implements OnInit {
     console.error(err)
   }
 
-  isNullOrIdIsNull(obj: any){
-    return obj == null || obj.id ==null
+  isNullOrPropertyIsNull(obj: any, prop: string){
+    return obj == null || !obj.hasOwnProperty(prop) || obj[prop] == null
   }
 
 }

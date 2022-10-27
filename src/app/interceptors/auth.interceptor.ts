@@ -9,15 +9,15 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor() { }
 
-  intercept(req: HttpRequest<any>,
-            next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const accessToken = localStorage.getItem("access_token");
-
-    if (accessToken) {
+    /*
+    * Intercept HttpRequest, includes token in header only if the request has Authorization header set.
+    */
+    if (accessToken && req.headers.keys().includes("Authorization")) {
       const cloned = req.clone({
-        headers: req.headers.set("Authorization",
-          "Bearer " + accessToken)
+        headers: req.headers.set("Authorization", "Bearer " + accessToken)
       });
 
       console.log("request capturada e token setado no Authorization")

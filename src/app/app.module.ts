@@ -13,14 +13,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
-import { MatNativeDateModule } from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import { LoginComponent } from './login/login.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
+import { LoginFormCriarContaComponent } from './login/form-criar-conta/login-form-criar-conta.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatSelectModule} from "@angular/material/select";
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    LoginFormCriarContaComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +44,13 @@ import { LoginComponent } from './login/login.component';
     ToastrModule.forRoot(),
     MatButtonModule,
     MatDialogModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatDatepickerModule,
+    MatSelectModule
   ],
   exports: [RouterModule, BrowserModule],
   providers: [
@@ -43,7 +58,8 @@ import { LoginComponent } from './login/login.component';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
 })

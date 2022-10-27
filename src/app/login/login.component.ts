@@ -1,35 +1,25 @@
-import { AuthTestService } from './../services/auth-test.service';
-import { Component } from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
+import {AuthService} from "../services/auth.service";
+import {AlertService} from "../core/alert.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {LoginFormCriarContaComponent} from "./form-criar-conta/login-form-criar-conta.component";
 
 @Component({
-  selector: 'login',
-  template: `
-<form [formGroup]="form">
-    <fieldset>
-        <legend>Login</legend>
-        <div class="form-field">
-            <label>Email:</label>
-            <input name="email" formControlName="email">
-        </div>
-        <div class="form-field">
-            <label>Password:</label>
-            <input name="password" formControlName="password"
-                   type="password">
-        </div>
-    </fieldset>
-    <div class="form-buttons">
-        <button class="button button-primary"
-                (click)="login()">Login</button>
-    </div>
-</form>`})
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
 export class LoginComponent {
     form:FormGroup;
+    @Output() onUsernameChange = new EventEmitter<String>()
 
     constructor(private fb:FormBuilder,
-                 private authService: AuthTestService,
-                 private router: Router) {
+                 private authService: AuthService,
+                 private router: Router,
+                private alertService: AlertService,
+                private dialog: MatDialog) {
 
         this.form = this.fb.group({
             email: ['',Validators.required],
@@ -41,22 +31,45 @@ export class LoginComponent {
       const val = this.form.value;
 
       if (val.email && val.password) {
-        this.authService.login(val.email, val.password)
-          .subscribe(
-            (response) => {
-              console.log("User is logged in");
-              console.log(response)
-              this.router.navigateByUrl('/');
+        this.authService.login(val.email, val.password).subscribe({
+          next: idToken => {
+            if (idToken) {
+              this.loginSuccess();
+              let username = idToken.full_name;
+              this.onUsernameChange.emit(username)
             }
-          );
+            else this.loginFail()
+          },
+          error: () => this.loginFail()
+        })
+      } else {
+        this.alertService.alertWarning("Campos de login são obrigatórios!")
+        this.highlightInvalidFields()
       }
     }
 
-    redirectLoginOidcProvider(){
-      // window.location.href = 'http://localhost:54869/realms/quarkus/protocol/openid-connect/auth'
-      //   + "?client_id=" + 'backend-service'
-      //   + "&redirect_uri=" + "http%3A%2F%2Flocalhost%3A" + "4200"
-      window.location.href = 'http://localhost:54869/realms/quarkus/protocol/openid-connect/auth?client_id=backend-service&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Flogin&response_type=code&response_mode=query&prompt=login'
+    openCriarContaDialog() {
+      const dialogConfig: MatDialogConfig = {
+        disableClose : true,
+        autoFocus : true,
+        width : "700px"
+      }
+
+      const dialogRef = this.dialog.open(LoginFormCriarContaComponent, dialogConfig);
     }
-}
+
+    private loginSuccess() {
+      this.alertService.alertSuccess("Login bem sucedido!")
+      this.router.navigateByUrl('/')
+    }
+
+    private loginFail() {
+      this.alertService.alertError("Falha no Login. Por favor, tente novamente")
+    }
+
+    private highlightInvalidFields() {
+      // TODO: criar estrutura para destacar apenas campos invalidos
+      // usar classes css, estudar validadores
+    }
+  }
 

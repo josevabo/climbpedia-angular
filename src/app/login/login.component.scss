@@ -1,0 +1,12 @@
+form {
+  display: flex;
+  width: 300px;
+  flex-flow: column;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 1px 2px 0;
+}
+mat-dialog-actions {
+  justify-content: space-between;
+  display: flex;
+}
