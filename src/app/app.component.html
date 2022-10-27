@@ -9,15 +9,15 @@
   <div class="nav__buttons" style="cursor:pointer;" [matMenuTriggerFor]="appMenu">
     <span>{{userName}}</span>
     <div class="user-img-container">
-      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/e7/7b/default-avatar-2020-56.jpg?w=100&amp;h=-1&amp;s=1" class="user-img">
+      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/e7/7b/default-avatar-2020-56.jpg?w=100&amp;h=-1&amp;s=1" class="user-img" alt="user image">
     </div>
     <mat-menu #appMenu="matMenu">
       <ng-template *ngIf="!isLoggedIn" matMenuContent>
-        <button mat-menu-item routerLink="/login">Login</button>
+        <button mat-menu-item routerLink="/login">Login&nbsp;&nbsp;<mat-icon>login</mat-icon></button>
       </ng-template>
       <ng-template *ngIf="isLoggedIn" matMenuContent>
-        <button mat-menu-item>Perfil</button>
-        <button mat-menu-item (click)="logout()">Logout</button>
+        <button mat-menu-item>Perfil&nbsp;&nbsp;<mat-icon>account_circle</mat-icon></button>
+        <button mat-menu-item (click)="logout()">Logout&nbsp;&nbsp;<mat-icon>logout</mat-icon></button>
       </ng-template>
     </mat-menu>
   </div>
