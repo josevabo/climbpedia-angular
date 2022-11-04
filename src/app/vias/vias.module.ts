@@ -18,7 +18,6 @@ import { ViasDetailPageComponent } from './vias-detail-page/vias-detail-page.com
 import { ViasFavoritasComponent } from './vias-favoritas/vias-favoritas.component';
 
 
-
 @NgModule({
   declarations: [
     CardViasComponent,

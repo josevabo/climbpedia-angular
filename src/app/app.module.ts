@@ -22,6 +22,9 @@ import {MatIconModule} from "@angular/material/icon";
 import { LoginFormCriarContaComponent } from './login/form-criar-conta/login-form-criar-conta.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSelectModule} from "@angular/material/select";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { LoadingComponent } from './core/components/loading/loading.component';
+import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
 
 
 
@@ -29,7 +32,8 @@ import {MatSelectModule} from "@angular/material/select";
   declarations: [
     AppComponent,
     LoginComponent,
-    LoginFormCriarContaComponent
+    LoginFormCriarContaComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -50,13 +54,19 @@ import {MatSelectModule} from "@angular/material/select";
     MatInputModule,
     MatIconModule,
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
-  exports: [RouterModule, BrowserModule],
+  exports: [RouterModule, BrowserModule, LoadingComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true
     },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
