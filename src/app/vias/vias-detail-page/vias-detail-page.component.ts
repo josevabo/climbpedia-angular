@@ -1,8 +1,8 @@
 import { ViasService } from '../../services/vias/vias.service';
-import { Via } from '../../models/via.model';
+import { Via } from '../../core/models/via.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {AlertService} from "../../core/alert.service";
+import {AlertService} from "../../core/services/alert.service";
 
 @Component({
   selector: 'app-vias-detail-page',

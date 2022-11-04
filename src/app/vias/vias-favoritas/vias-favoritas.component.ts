@@ -1,9 +1,9 @@
 import { ViasService } from '../../services/vias/vias.service';
 import { Component, OnInit } from '@angular/core';
-import { Via } from 'src/app/models/via.model';
+import { Via } from 'src/app/core/models/via.model';
 import {HttpErrorResponse} from "@angular/common/http";
-import {AlertService} from "../../core/alert.service";
-import {AuthService} from "../../services/auth.service";
+import {AlertService} from "../../core/services/alert.service";
+import {AuthService} from "../../core/services/auth.service";
 
 @Component({
   selector: 'app-vias-favoritas',

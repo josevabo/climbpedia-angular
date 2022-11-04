@@ -1,6 +1,6 @@
 import { SetoresService } from '../../services/setores/setores.service';
 import { ViasService } from '../../services/vias/vias.service';
-import { Via } from '../../models/via.model';
+import { Via } from '../../core/models/via.model';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ImagensService } from 'src/app/services/imagens/imagens.service';

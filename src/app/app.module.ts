@@ -1,4 +1,4 @@
-import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -25,6 +25,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { LoadingComponent } from './core/components/loading/loading.component';
 import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
+import {CoreModule} from "./core/core.module";
 
 
 
@@ -55,7 +56,8 @@ import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
     MatIconModule,
     MatDatepickerModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    CoreModule
   ],
   exports: [RouterModule, BrowserModule, LoadingComponent],
   providers: [

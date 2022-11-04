@@ -1,6 +1,6 @@
 import { ImagensService } from 'src/app/services/imagens/imagens.service';
 import { Component, OnInit } from '@angular/core';
-import { Imagem } from 'src/app/models/imagem.model';
+import { Imagem } from 'src/app/core/models/imagem.model';
 
 
 @Component({

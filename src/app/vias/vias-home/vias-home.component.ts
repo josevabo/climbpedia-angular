@@ -2,9 +2,9 @@ import { ViasFormInsertComponent } from '../vias-form-insert/vias-form-insert.co
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { ViasService } from '../../services/vias/vias.service';
-import { Via } from '../../models/via.model';
-import { AlertService } from 'src/app/core/alert.service';
-import {AuthService} from "../../services/auth.service";
+import { Via } from '../../core/models/via.model';
+import { AlertService } from 'src/app/core/services/alert.service';
+import {AuthService} from "../../core/services/auth.service";
 
 
 @Component({

@@ -1,8 +1,8 @@
 import {Component, ViewChild} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { faHouse, faUsers, faHeart, faImages } from '@fortawesome/free-solid-svg-icons';
-import { AlertService } from './core/alert.service';
-import { AuthService } from './services/auth.service';
+import { AlertService } from './core/services/alert.service';
+import { AuthService } from './core/services/auth.service';
 import {Router} from "@angular/router";
 
 @Component({

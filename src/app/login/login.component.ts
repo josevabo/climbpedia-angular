@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Output} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import {AuthService} from "../services/auth.service";
-import {AlertService} from "../core/alert.service";
+import {AuthService} from "../core/services/auth.service";
+import {AlertService} from "../core/services/alert.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {LoginFormCriarContaComponent} from "./form-criar-conta/login-form-criar-conta.component";
 
