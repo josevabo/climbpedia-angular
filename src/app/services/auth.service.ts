@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import jwtDecode from "jwt-decode";
@@ -56,7 +56,12 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.idTokenName)
+      return !this.isTokenExpired()
+  }
+
+  private isTokenExpired(): boolean {
+      let expireAt = Number(localStorage.getItem(this.expiresAtName))
+      return (Math.floor((new Date).getTime() / 1000)) >= expireAt;
   }
 
   decodeToken(token: string): string {

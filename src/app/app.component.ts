@@ -39,12 +39,12 @@ export class AppComponent {
     this.userName = username;
   }
 
-  logout() {
+  logout(msgAlert: string = "Logout com sucesso") {
     this.authService.logout()
     this.isLoggedIn = this.authService.isLoggedIn();
     if(!this.isLoggedIn) {
       this.changeUsername(this.initialUserName)
-      this.alertService.alertInfo("Logout com sucesso","Info", 2000)
+      this.alertService.alertInfo(msgAlert,"Info", 2000)
       this.router.navigateByUrl('/')
     }
   }
@@ -54,5 +54,10 @@ export class AppComponent {
       let newUserName = (this.authService.getUserName() as any).full_name;
       this.userName = !!newUserName ? newUserName : this.initialUserName;
     }
+    setInterval(() => {
+      if(this.userName != this.initialUserName && !this.authService.isLoggedIn()){
+        this.logout("Seu login expirou");
+      }
+    }, 10000) //check if token has Expired every 10s
   }
 }
