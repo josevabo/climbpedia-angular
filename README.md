@@ -1,4 +1,8 @@
 # ClimbpediaAngular
+[![DeepScan grade](https://deepscan.io/api/teams/19361/projects/22763/branches/675919/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=19361&pid=22763&bid=675919)
+
+This is a personal project build with angular. This is a frontend SPA made for climbers to discover and share their experiences with the climbing routes.
+Users can mark their favorites routes and learn about them together.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
 
