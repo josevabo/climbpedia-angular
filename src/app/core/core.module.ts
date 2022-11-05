@@ -1,8 +1,11 @@
 import {NgModule} from "@angular/core";
+import { MatInputAutofocusDirective } from './directives/mat-input-autofocus.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    MatInputAutofocusDirective
+  ],
   imports: [],
-  exports: []
+  exports: [MatInputAutofocusDirective]
   })
 export class CoreModule { }
