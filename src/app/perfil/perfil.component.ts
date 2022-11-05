@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Usuario} from "../core/models/usuario.model";
 import {AuthService} from "../core/services/auth.service";
 
 @Component({
@@ -8,14 +7,24 @@ import {AuthService} from "../core/services/auth.service";
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  usuario!: Usuario;
+  usuario!: any;
 
   constructor(private authService: AuthService) {
     this.usuario = this.authService.getUsuarioFromToken();
-    console.log(this.usuario);
+    Object.keys(this.usuario).forEach((key: any) => {
+      this.usuario[key] = this.getValueIfNotEmpty(this.usuario[key])
+    });
+    // console.log(this.usuario);
   }
 
   ngOnInit(): void {
+
+  }
+
+  getValueIfNotEmpty(value: any) {
+    console.log("if not empty", value);
+    value = (value && value.length && value !== "null") ? value : "Não Informado";
+    return value
   }
 
 }
