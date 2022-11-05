@@ -16,7 +16,7 @@
         <button mat-menu-item routerLink="/login">Login&nbsp;&nbsp;<mat-icon>login</mat-icon></button>
       </ng-template>
       <ng-template *ngIf="isLoggedIn" matMenuContent>
-        <button mat-menu-item>Perfil&nbsp;&nbsp;<mat-icon>account_circle</mat-icon></button>
+        <button mat-menu-item (click)="openPerfilDialog()">Perfil&nbsp;&nbsp;<mat-icon>account_circle</mat-icon></button>
         <button mat-menu-item (click)="logout()">Logout&nbsp;&nbsp;<mat-icon>logout</mat-icon></button>
       </ng-template>
     </mat-menu>

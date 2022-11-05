@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 import jwtDecode from "jwt-decode";
+import {Usuario} from "../models/usuario.model";
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +73,18 @@ export class AuthService {
     const idToken = localStorage.getItem(this.idTokenName);
     if(idToken) return this.decodeToken(idToken);
     else return undefined;
+  }
+
+  getUsuarioFromToken(): Usuario {
+    if (this.isLoggedIn()) {
+      const idToken: any = this.decodeToken(localStorage.getItem(this.idTokenName) as string)
+      return {
+        nome: idToken.full_name,
+        username: idToken.upn,
+        dataNasc: idToken.birthdate,
+        email: idToken.email
+      }
+    }
+    throw new Error("Usuário não logado!")
   }
 }

@@ -26,6 +26,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { LoadingComponent } from './core/components/loading/loading.component';
 import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
 import {CoreModule} from "./core/core.module";
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
@@ -34,7 +35,8 @@ import {CoreModule} from "./core/core.module";
     AppComponent,
     LoginComponent,
     LoginFormCriarContaComponent,
-    LoadingComponent
+    LoadingComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

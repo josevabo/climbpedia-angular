@@ -4,6 +4,8 @@ import { faHouse, faUsers, faHeart, faImages } from '@fortawesome/free-solid-svg
 import { AlertService } from './core/services/alert.service';
 import { AuthService } from './core/services/auth.service';
 import {Router} from "@angular/router";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {PerfilComponent} from "./perfil/perfil.component";
 
 @Component({
   selector: 'app-root',
@@ -24,7 +26,9 @@ export class AppComponent {
 
   constructor(private authService: AuthService,
               private alertService: AlertService,
-              private router: Router) {
+              private router: Router,
+              private dialog: MatDialog) {
+
     this.userName = this.initialUserName;
     this.isLoggedIn = authService.isLoggedIn();
   }
@@ -59,5 +63,15 @@ export class AppComponent {
         this.logout("Seu login expirou");
       }
     }, 10000) //check if token has Expired every 10s
+  }
+
+  openPerfilDialog() {
+    const dialogConfig: MatDialogConfig = {
+      disableClose : false,
+      autoFocus : true,
+      width : "500px"
+    }
+
+    this.dialog.open(PerfilComponent, dialogConfig);
   }
 }

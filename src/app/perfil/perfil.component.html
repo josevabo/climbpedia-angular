@@ -1,0 +1,12 @@
+<div mat-dialog-title style="display: inline-flex;width: 100%;justify-content: space-between;">
+  <h2 >Perfil <mat-icon>account_circle</mat-icon></h2>
+  <button matSuffix mat-button mat-dialog-close style="position: relative;float: right;">
+    <mat-icon class="scale-hover" [inline]="true" >close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <p><strong>Nome de usuário:</strong> {{usuario.username}}</p>
+  <p><strong>Nome completo:</strong> {{usuario.nome}}</p>
+  <p><strong>Email:</strong> {{usuario.email}}</p>
+  <p><strong>Data Nascimento:</strong> {{ usuario.dataNasc !== "null" ? usuario.dataNasc : "Não informado"}}</p>
+</div>
