@@ -6,6 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { ImagensService } from 'src/app/services/imagens/imagens.service';
 import { ConquistadoresService } from 'src/app/services/conquistadores/conquistadores.service';
 import { TiposViaService } from 'src/app/services/tipos-via/tipos-via.service';
+import {AlertService} from "../../core/services/alert.service";
 
 @Component({
   selector: 'app-vias-form-insert',
@@ -35,7 +36,8 @@ export class ViasFormInsertComponent implements OnInit {
     private conquistadoresService: ConquistadoresService,
     private tiposViaService: TiposViaService,
     private setoresService: SetoresService,
-    public dialogRef: MatDialogRef<ViasFormInsertComponent>
+    public dialogRef: MatDialogRef<ViasFormInsertComponent>,
+    private alertService: AlertService
     ) {
     this.via.setor = {
       id: null
@@ -63,17 +65,17 @@ export class ViasFormInsertComponent implements OnInit {
   insertVia() {
     console.log("insert Via completa:", this.via)
     let viaPost = this.via
-    console.log(viaPost.dtConquista?.toLocaleString())
-    // console.log(new Intl.DateTimeFormat().format(new Date(viaPost.dtConquista?)));
-    console.log(typeof(viaPost.dtConquista))
-
-    this.service.insertVia(viaPost).subscribe({
+    this.service.insertVia(viaPost)
+      .subscribe({
       next: response => {
         console.log("insertVias com sucesso")
         console.log(response)
+        this.alertService.alertSuccess("Via adicionada com sucesso!")
+        this.dialogRef.close()
       },
       error: err => {
         console.log("Erro no insert via\n" + JSON.stringify(err.error))
+        this.alertService.alertError("Não foi possível adicionar a via!")
       }
     })
 

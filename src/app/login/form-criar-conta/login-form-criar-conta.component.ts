@@ -41,16 +41,21 @@ export class LoginFormCriarContaComponent implements OnInit {
   criarConta(): void {
     let novaConta = this.form.value;
 
-    if (novaConta.nome && novaConta.username && novaConta.email
-      && novaConta.senha && novaConta.dataNasc && novaConta.cidadeId) {
+    if (novaConta.nome
+      && novaConta.username
+      && novaConta.email
+      && novaConta.senha
+      && novaConta.dataNasc
+      && novaConta.cidadeId) {
+
       novaConta.cidade = {id: novaConta.cidadeId}
       delete novaConta.cidadeId;
 
       this.authService.criarConta(novaConta).subscribe({
-        next: (response: any) => {
+        next: () => {
           this.alertService.alertSuccess("Conta criada com sucesso! Realize login!");
         },
-        error: (error: any) => {
+        error: () => {
           this.alertService.alertError("Falha ao criar conta. Por favor, tente novamente!");
         }
       })

@@ -1,6 +1,6 @@
 <div mat-dialog-title style="display: inline-flex;width: 100%;justify-content: space-between;">
   <h2 >Cadastrar nova via</h2>
-  <button matSuffix mat-button mat-dialog-close style="position: relative;float: right;">
+  <button matSuffix mat-button mat-dialog-close="" style="position: relative;float: right;">
     <mat-icon class="scale-hover" [inline]="true" >close</mat-icon>
   </button>
 </div>
@@ -63,7 +63,6 @@
   </mat-form-field>
   <mat-form-field >
     <mat-label>Data Conquista</mat-label>
-    <!-- <input matInput [(ngModel)]="via.dtConquista"  name="dtConquista"> -->
     <mat-label>Choose a date</mat-label>
     <input matInput [matDatepicker]="picker" [(ngModel)]="via.dtConquista"  name="dtConquista">
     <mat-hint>MM/DD/YYYY</mat-hint>
@@ -75,7 +74,7 @@
     <input matInput [(ngModel)]="via.extensao"  name="extensao">
   </mat-form-field>
   <mat-dialog-actions style="flex-flow: row-reverse;">
-    <button matSuffix mat-stroked-button color="primary" type="submit" style="position: relative;float: right;" [mat-dialog-close]="true">
+    <button matSuffix mat-stroked-button color="primary" type="submit" style="position: relative;float: right;">
       Salvar <mat-icon class="scale-hover">save</mat-icon>
     </button>
   </mat-dialog-actions>
