@@ -19,3 +19,5 @@ const envConfigFile = "export const environment = " + JSON.stringify(replacedEnv
 writeFile(targetPath, envConfigFile, 'utf-8', (err) => {
   if (err) console.error(err);
 })
+
+console.log(envConfigFile)
