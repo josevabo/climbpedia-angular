@@ -21,3 +21,4 @@ writeFile(targetPath, envConfigFile, 'utf-8', (err) => {
 })
 
 console.log(envConfigFile)
+console.log(process.env)
