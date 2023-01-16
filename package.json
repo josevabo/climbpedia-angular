@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "config": "ts-node -O {\\\"module\\\":\\\"commonjs\\\"} ./config.index.ts",
-    "build": "npm run config && ng build --prod",
+    "build": "ng build",
+    "build-github": "npm run config && ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
