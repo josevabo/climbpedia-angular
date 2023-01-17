@@ -15,10 +15,13 @@ Object.entries(environment).forEach(([key, value], index) => {
   replacedEnvironment[key] = systemValue;
 })
 
-const envConfigFile = "export const environment = " + JSON.stringify(replacedEnvironment,null, "\t");
+var envConfigFile = "export const environment = {\n"
+Object.entries(replacedEnvironment).forEach(([key, value], index)=> {
+  let valueString = (typeof value === "string") ? `\'${value}\'` : value;
+  envConfigFile += `\t${key}: ${valueString},\n`;
+})
+envConfigFile += "}"
+
 writeFile(targetPath, envConfigFile, 'utf-8', (err) => {
   if (err) console.error(err);
 })
-
-console.log(envConfigFile)
-console.log(process.env)
