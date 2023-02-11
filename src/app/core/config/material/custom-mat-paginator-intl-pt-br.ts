@@ -1,7 +1,9 @@
 import {MatPaginatorIntl} from "@angular/material/paginator";
 import {Injectable} from "@angular/core";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CustomMatPaginatorIntlPtBr extends MatPaginatorIntl {
   override firstPageLabel: string = 'Primeira página';
   override getRangeLabel =  (page: number, pageSize: number, length: number): string => {
