@@ -16,7 +16,7 @@ import { ViasFormInsertComponent } from './vias-form-insert/vias-form-insert.com
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ViasDetailPageComponent } from './vias-detail-page/vias-detail-page.component';
 import { ViasFavoritasComponent } from './vias-favoritas/vias-favoritas.component';
-import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -46,7 +46,20 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     ViasHomeComponent,
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    { provide: MatPaginatorIntl, useClass: class CustomMatPaginator extends MatPaginatorIntl {
+        override firstPageLabel: string = 'Primeira página';
+        override getRangeLabel =  (page: number, pageSize: number, length: number): string => {
+          page = page + 1;
+          let first = (page - 1) * (pageSize - 1) + 1;
+          let last = page * pageSize > length ? length : page * pageSize;
+          return first + " a " + last + " de " + length;
+        }
+        override itemsPerPageLabel: string = "Itens por página:"
+        override lastPageLabel: string = "Última página"
+        override nextPageLabel: string = "próxima página";
+        override previousPageLabel: string = "Página anterior"
+     }}
   ],
   bootstrap: [ViasHomeComponent]
 })
