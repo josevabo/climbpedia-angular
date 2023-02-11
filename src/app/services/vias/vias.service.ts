@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import {RetornoPaginado} from "../../core/models/retorno-paginado.model";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,12 @@ export class ViasService {
     this.viasFavoritasIdList = []
   }
 
-  getAllVias(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.viasEndpoint)
+  getVias(index: number, pageSize: number, search: string = ''): Observable<RetornoPaginado<Via>> {
+    let params = new HttpParams()
+      .append('search', search)
+      .append('index', index)
+      .append('size', pageSize);
+    return this.httpClient.get<RetornoPaginado<Via>>(this.viasEndpoint, {params: params})
   }
 
   getViaById(id: number) {
@@ -34,7 +39,7 @@ export class ViasService {
     let params = new HttpParams()
     params = params.append('search', search);
 
-    return this.httpClient.get<any[]>(this.viasEndpoint, {params:params})
+    return this.httpClient.get<RetornoPaginado<Via>>(this.viasEndpoint, {params:params})
   }
 
   addFavorite(viaId: number): Observable<any> {

@@ -16,6 +16,7 @@ import { ViasFormInsertComponent } from './vias-form-insert/vias-form-insert.com
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ViasDetailPageComponent } from './vias-detail-page/vias-detail-page.component';
 import { ViasFavoritasComponent } from './vias-favoritas/vias-favoritas.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -26,19 +27,20 @@ import { ViasFavoritasComponent } from './vias-favoritas/vias-favoritas.componen
     ViasDetailPageComponent,
     ViasFavoritasComponent,
   ],
-  imports: [
-    CommonModule,
-    FontAwesomeModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    RouterModule
-  ],
+    imports: [
+        CommonModule,
+        FontAwesomeModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        RouterModule,
+        MatPaginatorModule
+    ],
   exports: [
     CardViasComponent,
     ViasHomeComponent,

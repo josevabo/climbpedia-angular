@@ -5,6 +5,8 @@ import { ViasService } from '../../services/vias/vias.service';
 import { Via } from '../../core/models/via.model';
 import { AlertService } from 'src/app/core/services/alert.service';
 import {AuthService} from "../../core/services/auth.service";
+import {RetornoPaginado} from "../../core/models/retorno-paginado.model";
+import {PageEvent} from "@angular/material/paginator";
 
 
 @Component({
@@ -13,10 +15,18 @@ import {AuthService} from "../../core/services/auth.service";
   styleUrls: ['./vias-home.component.scss']
 })
 export class ViasHomeComponent implements OnInit {
+  length = 50;
+  pageSize = 15;
+  pageIndex = 0;
+  pageSizeOptions = [10, 15, 25, 50];
+
+  hidePageSize = false;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
+  disabled = false;
 
   title = 'Vias';
   vias: Via[];
-  totalVias: number = 0;
   search: string = ""
   constructor(private viasService: ViasService,
               private dialog: MatDialog,
@@ -28,10 +38,18 @@ export class ViasHomeComponent implements OnInit {
   ngOnInit() {
     this.getAllVias()
   }
+  handlePageEvent(e: PageEvent) {
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.getVias();
+  }
 
-  searchVias(){
+  getVias(){
     console.log("texto pesquisado: " + this.search)
-    this.viasService.findViasByText(this.search).subscribe((vias: Via[]) => {
+    this.viasService.getVias(this.pageIndex,this.pageSize, this.search).subscribe((retornoPaginado: RetornoPaginado<Via>) => {
+      let vias = retornoPaginado.resultados;
+      this.length = retornoPaginado.count;
       this.updateViasList(vias)
     })
 
@@ -39,13 +57,10 @@ export class ViasHomeComponent implements OnInit {
 
   getAllVias() {
     this.search = "";
-    return this.viasService.getAllVias().subscribe((vias: Via[]) => {
-      this.updateViasList(vias)
-    })
+    this.getVias()
   }
 
   updateViasList(vias: Via[]) {
-    this.totalVias = vias.length;
     if (this.authService.isLoggedIn()) {
       this.getViasFavoritasByUsuario().subscribe({
         next: (viasFavoritasId: any[]) => {

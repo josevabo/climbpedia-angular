@@ -1,28 +1,38 @@
-  <section class="filter-area" style="">
-    <span>filtros</span>
-    <div>filtro 1</div>
-    <div>filtro 2</div>
-    <div>filtro 3</div>
-    <div>filtro 4</div>
-    <div>filtro 5</div>
-  </section>
-  <section id="content-area">
-    <!-- <div id="content-filter">filtros conteudo</div> -->
-    <div id="main-content">
-      <div id="main-content-header">
-        <p style="text-align: left;padding-left: 5px;align-self:center;">Foram encontradas {{totalVias}} vias</p>
-        <button mat-button matPreffix style="height: fit-content;" (click)="openInsertDialog()"><mat-icon [inline]="true">add_circle</mat-icon> Nova Via</button>
-        <form class="example-form" (submit)="searchVias()">
-          <mat-form-field >
-          <!-- <span matPrefix> </span> -->
-          <!-- <mat-form-field appearance="fill"> -->
-            <mat-label>Pesquisar</mat-label>
-            <input matInput [(ngModel)]="search"  name="search">
-            <button matSuffix mat-button style="border:none;background:transparent;" type="submit"><mat-icon class="scale-hover" >search</mat-icon></button>
-          </mat-form-field>
-          </form>
-      </div>
-      <app-card-vias *ngFor="let via of vias" [via]="via"></app-card-vias>
+<section id="content-area">
+  <div id="main-content">
+    <div id="main-content-header">
+      <mat-paginator #paginator
+                     (page)="handlePageEvent($event)"
+                     [length]="length"
+                     [pageSize]="pageSize"
+                     [disabled]="disabled"
+                     [showFirstLastButtons]="false"
+                     [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+                     [hidePageSize]="hidePageSize"
+                     [pageIndex]="pageIndex"
+                     aria-label="Select page">
+      </mat-paginator>
+      <button mat-button matPreffix style="height: fit-content;" (click)="openInsertDialog()"><mat-icon [inline]="true">add_circle</mat-icon> Nova Via</button>
+      <form class="example-form" (submit)="getVias()">
+        <mat-form-field >
+          <mat-label>Pesquisar</mat-label>
+          <input matInput [(ngModel)]="search"  name="search">
+          <button matSuffix mat-button style="border:none;background:transparent;" type="submit"><mat-icon class="scale-hover" >search</mat-icon></button>
+        </mat-form-field>
+        </form>
     </div>
-  </section>
-<!-- </section> -->
+    <app-card-vias *ngFor="let via of vias" [via]="via"></app-card-vias>
+  <mat-paginator #paginator
+                 (page)="handlePageEvent($event)"
+                 [length]="length"
+                 [pageSize]="pageSize"
+                 [disabled]="disabled"
+                 [showFirstLastButtons]="showFirstLastButtons"
+                 [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+                 [hidePageSize]="hidePageSize"
+                 [pageIndex]="pageIndex"
+                 aria-label="Select page">
+  </mat-paginator>
+  </div>
+</section>
+
