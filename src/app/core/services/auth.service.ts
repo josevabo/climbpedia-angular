@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import jwtDecode from "jwt-decode";
 import {Usuario} from "../models/usuario.model";
 
@@ -15,8 +15,15 @@ export class AuthService {
   idTokenName: string = "id_token"
   refreshTokenName: string = "refresh_token"
   expiresAtName: string = "expires_at"
+  private user$: BehaviorSubject<Usuario>;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.user$ = new BehaviorSubject<Usuario>({username: ""})
+  }
+
+  getUsuario$(): Observable<Usuario> {
+    return this.user$.asObservable();
+  }
 
   criarConta(dadosNovaConta: any): Observable<any> {
     return this.httpClient.post(this.usuarioServiceUrl,dadosNovaConta);
@@ -27,22 +34,24 @@ export class AuthService {
       this.httpClient.post(this.authServiceUrl,{username:email,password:password},{responseType:"json"})
           .subscribe({
             next: (token: any) => {
-              console.log(token)
-              localStorage.setItem(this.accessTokenName, token[this.accessTokenName])
-              localStorage.setItem(this.idTokenName, token[this.idTokenName])
-              localStorage.setItem(this.refreshTokenName, token[this.refreshTokenName])
-              localStorage.setItem(this.expiresAtName, token[this.expiresAtName])
-
-              const idTokenDecoded = this.decodeToken(token[this.idTokenName]);
-              observer.next(idTokenDecoded)
+              this.saveTokenToLocalStorage(token);
+              this.user$.next(this.getUsuarioFromToken())
+              observer.next()
             },
             error: error => {
               console.log(error)
-              observer.next(false)
+              observer.error(error)
             }
           })
       }
     )
+  }
+
+  private saveTokenToLocalStorage(token: any) {
+    localStorage.setItem(this.accessTokenName, token[this.accessTokenName])
+    localStorage.setItem(this.idTokenName, token[this.idTokenName])
+    localStorage.setItem(this.refreshTokenName, token[this.refreshTokenName])
+    localStorage.setItem(this.expiresAtName, token[this.expiresAtName])
   }
 
   refreshToken() {

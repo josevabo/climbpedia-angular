@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="nav__buttons" style="cursor:pointer;" [matMenuTriggerFor]="appMenu">
-    <span>{{userName}}</span>
+    <span>{{username}}</span>
     <div class="user-img-container">
       <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/e7/7b/default-avatar-2020-56.jpg?w=100&amp;h=-1&amp;s=1" class="user-img" alt="user image">
     </div>
@@ -49,5 +49,5 @@
     </div>
   </section>
   <app-loading></app-loading>
-  <router-outlet (activate)="subscribeToEmmiter($event)"></router-outlet>
+  <router-outlet></router-outlet>
 

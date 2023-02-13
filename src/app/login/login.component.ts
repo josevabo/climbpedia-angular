@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import {AuthService} from "../core/services/auth.service";
@@ -13,8 +13,6 @@ import {LoginFormCriarContaComponent} from "./form-criar-conta/login-form-criar-
 })
 export class LoginComponent {
     form:FormGroup;
-    @Output() onUsernameChange = new EventEmitter<String>()
-
     constructor(private fb:FormBuilder,
                  private authService: AuthService,
                  private router: Router,
@@ -32,14 +30,7 @@ export class LoginComponent {
 
       if (val.email && val.password) {
         this.authService.login(val.email, val.password).subscribe({
-          next: idToken => {
-            if (idToken) {
-              this.loginSuccess();
-              let username = idToken.full_name;
-              this.onUsernameChange.emit(username)
-            }
-            else this.loginFail()
-          },
+          next: () => this.loginSuccess(),
           error: () => this.loginFail()
         })
       } else {

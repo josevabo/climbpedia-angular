@@ -6,6 +6,7 @@ import { AuthService } from './core/services/auth.service';
 import {Router} from "@angular/router";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {PerfilComponent} from "./perfil/perfil.component";
+import {Usuario} from "./core/models/usuario.model";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent {
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
   isLoggedIn: boolean = false;
   title = 'Climbpedia';
-  userName: String;
+  username: string;
   faHouse = faHouse;
   faUsers = faUsers;
   faHeart = faHeart;
@@ -29,40 +30,31 @@ export class AppComponent {
               private router: Router,
               private dialog: MatDialog) {
 
-    this.userName = this.initialUserName;
+    this.username = this.initialUserName;
     this.isLoggedIn = authService.isLoggedIn();
   }
+  ngOnInit() {
+    this.subscribeToAuthService();
+    if(this.isLoggedIn) {
+      let newUserName = (this.authService.getUserName() as any).full_name;
+      this.changeUsername(newUserName)
+    }
+    setInterval(() => { //TODO: logout e expiracao de login deve ser controlado no auth.service
+      if(this.username != this.initialUserName && !this.authService.isLoggedIn()){
+        this.logout("Seu login expirou");
+      }
+    }, 10000) //check if token has Expired every 10s
+  }
 
-  subscribeToEmmiter(loginComponentRef: any) {
-    loginComponentRef.onUsernameChange.subscribe((username: any) => {
-      this.changeUsername(username);
-      this.isLoggedIn = this.authService.isLoggedIn();
-    })
-  }
-  changeUsername(username: string) {
-    this.userName = username;
-  }
 
   logout(msgAlert: string = "Logout com sucesso") {
     this.authService.logout()
     this.isLoggedIn = this.authService.isLoggedIn();
-    if(!this.isLoggedIn) {
+    if(!this.isLoggedIn) { //TODO: troca de nome no logout será automatica apos auth.service emitir usuario vazio
       this.changeUsername(this.initialUserName)
       this.alertService.alertInfo(msgAlert,"Info", 2000)
       this.router.navigateByUrl('/')
     }
-  }
-
-  ngOnInit() {
-    if(this.isLoggedIn) {
-      let newUserName = (this.authService.getUserName() as any).full_name;
-      this.userName = !!newUserName ? newUserName : this.initialUserName;
-    }
-    setInterval(() => {
-      if(this.userName != this.initialUserName && !this.authService.isLoggedIn()){
-        this.logout("Seu login expirou");
-      }
-    }, 10000) //check if token has Expired every 10s
   }
 
   openPerfilDialog() {
@@ -74,4 +66,16 @@ export class AppComponent {
 
     this.dialog.open(PerfilComponent, dialogConfig);
   }
+  changeUsername(username: string) {
+    this.username = !!username ? username : this.initialUserName;
+  }
+  private subscribeToAuthService() {
+    this.authService.getUsuario$().subscribe({
+      next: (user: Usuario) => {
+        this.isLoggedIn = this.authService.isLoggedIn();
+        this.changeUsername(user.nome as string)
+      }
+    })
+  }
+
 }
