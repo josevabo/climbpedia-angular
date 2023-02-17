@@ -4,57 +4,95 @@
     <mat-icon class="scale-hover" [inline]="true" >close</mat-icon>
   </button>
 </div>
-<form name="form-insert-via" class="" (submit)="insertVia()">
+<form [formGroup]="viaInsertForm" name="form-insert-via" class="" (submit)="insertVia()" style="display:flex;flex-direction:column;">
+  <div>
   <mat-form-field style="width:50%;">
     <mat-label>Nome</mat-label>
-    <input matInput [(ngModel)]="via.nome"  name="nome">
+    <input formControlName="nome" matInput name="nome" class="form-control">
+    <mat-hint *ngIf="viaInsertForm.controls['nome'].invalid && (viaInsertForm.controls['nome'].dirty || viaInsertForm.controls['nome'].touched)"
+         class="alert field-hint">
+      <div *ngIf="viaInsertForm.controls['nome'].errors?.['required']">
+        Campo obrigatório
+      </div>
+      <div *ngIf="viaInsertForm.controls['nome'].errors?.['minlength']">
+        Nome deve ter no mínimo 5 caracteres
+      </div>
+    </mat-hint>
   </mat-form-field>
   <mat-form-field  style="width:20%;">
     <mat-label>Tipo de Via</mat-label>
-    <mat-select [(ngModel)]="via.tipoVia.id" name="tipoVia_id">
+    <mat-select formControlName="tipoVia" class="form-control">
       <mat-option>--</mat-option>
       <mat-option *ngFor="let tipoVia of tiposVia" [value]="tipoVia.id">
         {{tipoVia.nome}}
       </mat-option>
     </mat-select>
+    <mat-hint *ngIf="viaInsertForm.controls['tipoVia'].invalid && (viaInsertForm.controls['tipoVia'].dirty || viaInsertForm.controls['tipoVia'].touched)"
+              class="alert field-hint">
+      <div *ngIf="viaInsertForm.controls['tipoVia'].errors?.['required']">
+        Campo obrigatório
+      </div>
+    </mat-hint>
   </mat-form-field>
   <mat-form-field  style="width:20%;">
     <mat-label>Graduação</mat-label>
-    <input matInput [(ngModel)]="via.graduacao"  name="graduacao">
+    <input matInput formControlName="graduacao"  name="graduacao" >
+    <mat-hint *ngIf="viaInsertForm.controls['graduacao'].invalid && (viaInsertForm.controls['graduacao'].dirty || viaInsertForm.controls['graduacao'].touched)"
+       class="alert">
+    <div *ngIf="viaInsertForm.controls['graduacao'].errors?.['required']">
+      Campo obrigatório
+    </div>
+  </mat-hint>
   </mat-form-field>
+  </div>
+  <div>
   <mat-form-field  style="width:50%;">
     <mat-label>Descrição</mat-label>
-    <textarea matInput [(ngModel)]="via.descricao"  name="descricao"></textarea>
+    <textarea matInput formControlName="descricao"  name="descricao"></textarea>
+    <mat-hint *ngIf="viaInsertForm.controls['descricao'].invalid && (viaInsertForm.controls['descricao'].dirty || viaInsertForm.controls['descricao'].touched)"
+         class="alert">
+      <div *ngIf="viaInsertForm.controls['descricao'].errors?.['required']">
+        Campo obrigatório
+      </div>
+    </mat-hint>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Setor</mat-label>
-    <mat-select [(ngModel)]="via.setor.id" name="setor">
+    <mat-select formControlName="setor">
       <mat-option>--</mat-option>
       <mat-option *ngFor="let setor of setores" [value]="setor.id">
         {{setor.nome}}
       </mat-option>
     </mat-select>
+    <mat-hint *ngIf="viaInsertForm.controls['setor'].invalid && (viaInsertForm.controls['setor'].dirty || viaInsertForm.controls['setor'].touched)"
+              class="alert">
+      <div *ngIf="viaInsertForm.controls['setor'].errors?.['required']">
+        Campo obrigatório
+      </div>
+    </mat-hint>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Url do croqui</mat-label>
-    <input matInput [(ngModel)]="via.urlCroqui"  name="urlCroqui">
+    <input matInput formControlName="urlCroqui"  name="urlCroqui">
   </mat-form-field>
   <mat-form-field >
     <mat-label>Carregar Imagem</mat-label>
-    <mat-select [(ngModel)]="via.imagem.id" name="imagem_id">
+    <mat-select formControlName="imagem" >
       <mat-option>--</mat-option>
       <mat-option *ngFor="let imagem of imagens" [value]="imagem.id">
         {{imagem.url}}
       </mat-option>
     </mat-select>
   </mat-form-field>
+  </div>
+  <div>
   <mat-form-field >
     <mat-label>Tags</mat-label>
-    <input matInput [(ngModel)]="via.tags"  name="tags">
+    <input matInput formControlName="tags"  name="tags">
   </mat-form-field>
   <mat-form-field >
     <mat-label>Conquistador</mat-label>
-    <mat-select [(ngModel)]="via.conquistador.id" name="conquistador_id">
+    <mat-select formControlName="conquistador" >
       <mat-option>--</mat-option>
       <mat-option *ngFor="let conquistador of conquistadores" [value]="conquistador.id">
         {{conquistador.nome}}
@@ -64,17 +102,18 @@
   <mat-form-field >
     <mat-label>Data Conquista</mat-label>
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="via.dtConquista"  name="dtConquista">
+    <input matInput [matDatepicker]="picker" formControlName="dtConquista"  name="dtConquista">
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <mat-form-field >
     <mat-label>Extensao</mat-label>
-    <input matInput [(ngModel)]="via.extensao"  name="extensao">
+    <input matInput formControlName="extensao"  name="extensao">
   </mat-form-field>
+  </div>
   <mat-dialog-actions style="flex-flow: row-reverse;">
-    <button matSuffix mat-stroked-button color="primary" type="submit" style="position: relative;float: right;">
+    <button matSuffix mat-stroked-button color="primary" type="submit" style="position: relative;float: right;" [disabled]="!viaInsertForm.valid">
       Salvar <mat-icon class="scale-hover">save</mat-icon>
     </button>
   </mat-dialog-actions>

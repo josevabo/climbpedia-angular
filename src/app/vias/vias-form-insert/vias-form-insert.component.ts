@@ -7,6 +7,7 @@ import { ImagensService } from 'src/app/services/imagens/imagens.service';
 import { ConquistadoresService } from 'src/app/services/conquistadores/conquistadores.service';
 import { TiposViaService } from 'src/app/services/tipos-via/tipos-via.service';
 import {AlertService} from "../../core/services/alert.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-vias-form-insert',
@@ -14,7 +15,6 @@ import {AlertService} from "../../core/services/alert.service";
   styleUrls: ['./vias-form-insert.component.scss']
 })
 export class ViasFormInsertComponent implements OnInit {
-  via: Via = {}
   setores: any[] = [];
   tiposVia: any[] = [
     {id:1, nome: "Tradicional"},
@@ -29,6 +29,7 @@ export class ViasFormInsertComponent implements OnInit {
   ];
   imagens: any[] = [];
 
+  viaInsertForm: any = null;
 
   constructor(
     private service: ViasService,
@@ -38,20 +39,7 @@ export class ViasFormInsertComponent implements OnInit {
     private setoresService: SetoresService,
     public dialogRef: MatDialogRef<ViasFormInsertComponent>,
     private alertService: AlertService
-    ) {
-    this.via.setor = {
-      id: null
-    }
-    this.via.imagem = {
-      id: null
-    }
-    this.via.conquistador = {
-      id: null
-    }
-    this.via.tipoVia = {
-      id: null
-    }
-  }
+    ) { }
 
   ngOnInit(): void {
     this.setoresService.getAllSetores().subscribe(response => {
@@ -60,40 +48,51 @@ export class ViasFormInsertComponent implements OnInit {
     this.imagensService.getAllImagens().subscribe(response => {
       this.imagens = response
     })
-  }
 
+    this.viaInsertForm = new FormGroup({
+      nome: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      setor: new FormControl('', Validators.required),
+      graduacao: new FormControl('', Validators.required),
+      tipoVia: new FormControl('', Validators.required),
+      descricao: new FormControl('', Validators.required),
+      urlCroqui: new FormControl(),
+      imagem: new FormControl(),
+      tags: new FormControl(),
+      conquistador: new FormControl(),
+      dtConquista: new FormControl(),
+      extensao: new FormControl()
+    });
+  }
   insertVia() {
-    console.log("insert Via completa:", this.via)
-    let viaPost = this.via
+    if(!this.viaInsertForm.valid) {
+      this.alertService.alertError("Preencha o formulário corretamente")
+    }
+
+    let viaPost = this.convertToVia(this.viaInsertForm)
     this.service.insertVia(viaPost)
       .subscribe({
-      next: response => {
-        console.log("insertVias com sucesso")
-        console.log(response)
+      next: () => {
         this.alertService.alertSuccess("Via adicionada com sucesso!")
         this.dialogRef.close()
       },
-      error: err => {
-        console.log("Erro no insert via\n" + JSON.stringify(err.error))
+      error: (error: any) => {
+        console.log("Erro no insert via\n" + JSON.stringify(error.error))
         this.alertService.alertError("Não foi possível adicionar a via!")
+        if(error.error.detail) this.alertService.multiAlertWarning(error.error.detail)
       }
     })
-
   }
 
-  // removeEmpty(obj: any) {
-  //   return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));
-  // }
-  // https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript
-  removeEmpty(obj: any): any {
-    return Object.fromEntries(
-      Object.entries(obj)
-        .filter(([_, v]) => v != null)
-        .map(([k, v]) => [k, v === Object(v) ? this.removeEmpty(v) : v])
-        .map(([k, v]) => [typeof(v) === 'object' && Object.keys(v).length == 0 ? delete obj[k] : v])
-    );
-    // return obj
+  convertToVia(form: FormGroup): Via{
+    let via = form.value
+    via.setor = {"id": via.setor}
+    via.conquistador = {"id": via.conquistador}
+    via.tipoVia = {"id": via.tipoVia}
+    via.imagem = {"id": via.imagem}
+    return via;
   }
-
 }
 
