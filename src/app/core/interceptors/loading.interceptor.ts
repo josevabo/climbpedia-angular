@@ -23,11 +23,11 @@ export class LoadingInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
           if (error.status === 403) {
-            this.alertService.alertError("Falha na requisição. Você não tem permissão para realizar esta ação")
+            this.alertService.alertError("Erro: Você não tem permissão para realizar esta ação")
           } else if (error.status === 401) {
-            this.alertService.alertError("Falha na requisição. Você não está autenticado para realizar esta ação")
+            this.alertService.alertError("Erro: Você deve estar logado para realizar esta ação")
           }
-        return throwError(() => error.message)
+        return throwError(() => error)
       }),
       finalize(() => {
         this.activeRequests--;

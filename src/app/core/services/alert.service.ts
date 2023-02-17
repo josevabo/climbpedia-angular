@@ -30,4 +30,9 @@ export class AlertService {
   alertShow(msg: string, title: string = "Info", timeOut: number = this.defaultTimeOut){
     this.toastr.show(msg, title,{timeOut: timeOut})
   }
+
+  multiAlertWarning(errors: string[]) {
+    if(errors.length > 5) console.warn("Uso não recomendado de alertas: Alerta de erros invocado com mais que 5 mensagens")
+    errors.forEach(erro => this.alertWarning(erro))
+  }
 }
