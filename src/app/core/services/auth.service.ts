@@ -29,9 +29,9 @@ export class AuthService {
     return this.httpClient.post(this.usuarioServiceUrl,dadosNovaConta);
   }
 
-  login(email:string, password:string): Observable<any> {
+  login(username:string, password:string): Observable<any> {
      return new Observable<any>( (observer) => {
-      this.httpClient.post(this.authServiceUrl,{username:email,password:password},{responseType:"json"})
+      this.httpClient.post(this.authServiceUrl,{username:username,password:password},{responseType:"json"})
           .subscribe({
             next: (token: any) => {
               this.saveTokenToLocalStorage(token);
