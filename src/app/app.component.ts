@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { faHouse, faUsers, faHeart, faImages } from '@fortawesome/free-solid-svg-icons';
 import { AlertService } from './core/services/alert.service';
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from './core/auth/auth.service';
 import {Router} from "@angular/router";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {PerfilComponent} from "./perfil/perfil.component";
@@ -31,7 +31,7 @@ export class AppComponent {
               private dialog: MatDialog) {
 
     this.username = this.initialUserName;
-    this.isLoggedIn = authService.isLoggedIn();
+    this.isLoggedIn = authService.isAuthenticated();
   }
   ngOnInit() {
     this.subscribeToAuthService();
@@ -40,7 +40,7 @@ export class AppComponent {
       this.changeUsername(newUserName)
     }
     setInterval(() => { //TODO: logout e expiracao de login deve ser controlado no auth.service
-      if(this.username != this.initialUserName && !this.authService.isLoggedIn()){
+      if(this.username != this.initialUserName && !this.authService.isAuthenticated()){
         this.logout("Seu login expirou");
       }
     }, 10000) //check if token has Expired every 10s
@@ -49,7 +49,7 @@ export class AppComponent {
 
   logout(msgAlert: string = "Logout com sucesso") {
     this.authService.logout()
-    this.isLoggedIn = this.authService.isLoggedIn();
+    this.isLoggedIn = this.authService.isAuthenticated();
     if(!this.isLoggedIn) { //TODO: troca de nome no logout será automatica apos auth.service emitir usuario vazio
       this.changeUsername(this.initialUserName)
       this.alertService.alertInfo(msgAlert,"Info", 2000)
@@ -72,7 +72,7 @@ export class AppComponent {
   private subscribeToAuthService() {
     this.authService.getUsuario$().subscribe({
       next: (user: Usuario) => {
-        this.isLoggedIn = this.authService.isLoggedIn();
+        this.isLoggedIn = this.authService.isAuthenticated();
         this.changeUsername(user.nome as string)
       }
     })

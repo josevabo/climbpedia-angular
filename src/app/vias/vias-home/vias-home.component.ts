@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViasService } from '../../services/vias/vias.service';
 import { Via } from '../../core/models/via.model';
 import { AlertService } from 'src/app/core/services/alert.service';
-import {AuthService} from "../../core/services/auth.service";
+import {AuthService} from "../../core/auth/auth.service";
 import {RetornoPaginado} from "../../core/models/retorno-paginado.model";
 import {PageEvent} from "@angular/material/paginator";
 
@@ -61,7 +61,7 @@ export class ViasHomeComponent implements OnInit {
   }
 
   updateViasList(vias: Via[]) {
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isAuthenticated()) {
       this.getViasFavoritasByUsuario().subscribe({
         next: (viasFavoritasId: any[]) => {
           vias.forEach(via => {

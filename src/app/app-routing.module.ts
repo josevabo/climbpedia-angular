@@ -5,12 +5,13 @@ import { ForumHomeComponent } from './forum/forum-home/forum-home.component';
 import { ViasHomeComponent } from './vias/vias-home/vias-home.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {AuthGuard} from "./core/auth/auth.guard";
 
 const ROUTES: Routes = [
   {path: "vias", component: ViasHomeComponent, children: [
   ]},
   {path: "login", component: LoginComponent},
-  {path: "vias/favoritas", component: ViasFavoritasComponent},
+  {path: "vias/favoritas", component: ViasFavoritasComponent, canActivate: [AuthGuard]},
   {path: "vias/:id", component: ViasDetailPageComponent},
   {path: "forum", component: ForumHomeComponent},
   {path: "galeria", loadChildren: () => import('./galeria/galeria.module').then(m => m.GaleriaModule)},

@@ -65,7 +65,7 @@ export class AuthService {
     localStorage.removeItem(this.expiresAtName)
   }
 
-  isLoggedIn(): boolean {
+  isAuthenticated(): boolean {
       return !this.isTokenExpired()
   }
 
@@ -85,7 +85,7 @@ export class AuthService {
   }
 
   getUsuarioFromToken(): Usuario {
-    if (this.isLoggedIn()) {
+    if (this.isAuthenticated()) {
       const idToken: any = this.decodeToken(localStorage.getItem(this.idTokenName) as string)
       return {
         nome: idToken.full_name,
