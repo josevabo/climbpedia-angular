@@ -25,6 +25,10 @@ export class AuthService {
     return this.user$.asObservable();
   }
 
+  userHasRole(perfil: string): boolean {
+    return this.getRoles().includes(perfil) || false;
+  }
+
   criarConta(dadosNovaConta: any): Observable<any> {
     return this.httpClient.post(this.usuarioServiceUrl,dadosNovaConta);
   }
@@ -84,14 +88,24 @@ export class AuthService {
     else return undefined;
   }
 
+  getRoles(): string[] {
+    if (this.isAuthenticated()) {
+      let decoded: any = this.decodeToken(localStorage.getItem(this.accessTokenName) as string);
+      return decoded.groups;
+    }
+    else return [];
+  }
+
   getUsuarioFromToken(): Usuario {
     if (this.isAuthenticated()) {
       const idToken: any = this.decodeToken(localStorage.getItem(this.idTokenName) as string)
+      console.log(idToken)
       return {
         nome: idToken.full_name,
         username: idToken.upn,
         dataNasc: idToken.birthdate,
-        email: idToken.email
+        email: idToken.email,
+        // perfil: [idToken.perfil]
       }
     }
     throw new Error("Usuário não logado!")

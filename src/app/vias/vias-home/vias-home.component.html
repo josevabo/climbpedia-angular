@@ -12,7 +12,7 @@
                      [pageIndex]="pageIndex"
                      aria-label="Select page">
       </mat-paginator>
-      <button mat-button matPreffix style="height: fit-content;" (click)="openInsertDialog()"><mat-icon [inline]="true">add_circle</mat-icon> Nova Via</button>
+      <button *ngIf="userIsAdmin()" mat-button matPreffix style="height: fit-content;" (click)="openInsertDialog()"><mat-icon [inline]="true">add_circle</mat-icon> Nova Via</button>
       <form class="example-form" (submit)="getVias()">
         <mat-form-field >
           <mat-label>Pesquisar</mat-label>

@@ -101,5 +101,7 @@ export class ViasHomeComponent implements OnInit {
       if(result) this.getAllVias();
     });
   }
-
+  userIsAdmin(): boolean {
+    return this.authService.userHasRole("admin");
+  }
 }

@@ -8,4 +8,6 @@ export interface Usuario {
     nome?: string,
     siglaUf?: string
   }
+
+  perfil?: string[];
 }
