@@ -49,12 +49,9 @@ export class AppComponent {
 
   logout(msgAlert: string = "Logout com sucesso") {
     this.authService.logout()
-    this.isLoggedIn = this.authService.isAuthenticated();
-    if(!this.isLoggedIn) { //TODO: troca de nome no logout será automatica apos auth.service emitir usuario vazio
-      this.changeUsername(this.initialUserName)
-      this.alertService.alertInfo(msgAlert,"Info", 2000)
-      this.router.navigateByUrl('/')
-    }
+    this.alertService.alertInfo(msgAlert,"Info", 2000)
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.navigateByUrl('/',{})
   }
 
   openPerfilDialog() {

@@ -15,10 +15,11 @@ export class AuthService {
   idTokenName: string = "id_token"
   refreshTokenName: string = "refresh_token"
   expiresAtName: string = "expires_at"
+  private emptyUser: Usuario = {username: ""};
   private user$: BehaviorSubject<Usuario>;
 
   constructor(private httpClient: HttpClient) {
-    this.user$ = new BehaviorSubject<Usuario>({username: ""})
+    this.user$ = new BehaviorSubject<Usuario>(this.emptyUser)
   }
 
   getUsuario$(): Observable<Usuario> {
@@ -67,6 +68,7 @@ export class AuthService {
     localStorage.removeItem(this.idTokenName)
     localStorage.removeItem(this.refreshTokenName)
     localStorage.removeItem(this.expiresAtName)
+    this.user$.next(this.emptyUser);
   }
 
   isAuthenticated(): boolean {
